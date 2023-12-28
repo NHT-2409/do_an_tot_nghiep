@@ -1,0 +1,43 @@
+<form action="" class="form-inline" method="post" role="form">
+  <button type="submit" (click)="add()" class="btn btn-primary">Add new</button>
+</form>
+
+<hr>
+
+<div class="mat-elevation-z8" id="father">
+  <table class="table" style="min-height: 500px;">
+    <thead class="head">
+      <tr>
+        <th>No.</th>
+        <th>Image</th>
+        <th style="width: 150px;">Title</th>
+        <th style="width: 300px;">Description</th>
+        <th>Name Admin</th>
+        <th style="width: 120px;">Created Time</th>
+        <th style="width: 120px;">Updated Time</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let item of news | paginate: { itemsPerPage: 5, currentPage: currentPage }; let i = index">
+          <td scope="row">{{ (currentPage - 1) * 5 + i + 1 }}</td>
+          <td>
+            <img (click)="viewImage(item?.imageUrl)" style="width: 50px; height: 50px; border-radius: 9rem;" src="{{ item?.imageUrl }}">
+          </td>
+          <td>{{item?.title}}</td>
+          <td>{{formatDescription(item?.description)}}</td>
+          <td>{{getAdminName(item?.admin_id?.id) | titlecase}}</td>
+          <td>{{ item?.created_time | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ item?.updated_time | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>
+            <button (click)="update(item)" class="btn btn-primary mr-1" >Update</button>
+            <button class="btn btn-danger mr-1" (click)="deleteNews(item)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="pagination">
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    <span style="margin-left: 6px; margin-top: 4px;"> {{ news?.length }} Items </span>
+  </div>
+</div>
+

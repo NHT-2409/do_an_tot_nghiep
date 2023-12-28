@@ -1,0 +1,97 @@
+<app-header></app-header>
+
+<section class="bg-primary py-1">
+  <div class="container">
+    <h2 class="text-white"> {{ categoryData.name | uppercase }} </h2>
+  </div>
+</section>
+
+<section class="padding-y">
+  <div class="container">
+    <div class="row">
+      <aside class="col-lg-3">
+
+        <button class="btn btn-outline-secondary mb-3 w-100  d-lg-none" data-bs-toggle="collapse"
+          data-bs-target="#aside_filter">Show filter</button>
+
+        <div id="aside_filter" class="collapse card d-lg-block mb-5">
+          <article class="filter-group">
+            <header class="card-header">
+              <a class="title" data-bs-toggle="collapse" data-bs-target="#collapse_aside2">
+                <i class="icon-control fa fa-chevron-down"></i> Price
+              </a>
+            </header>
+            <div class="collapse show" id="collapse_aside2">
+              <div class="card-body">
+                <input [min]="0" (ngModelChange)="onRangeChange()" [(ngModel)]="rangeValue" type="range" class="form-range" min="0" max="100000000">
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <label for="min" class="form-label">Min</label>
+                    <input [min]="0" [max]="100000000" [(ngModel)]="minValue" class="form-control" id="min" placeholder="đ0" type="number">
+                  </div>
+
+                  <div class="col-6">
+                    <label for="max" class="form-label">Max</label>
+                    <input (ngModelChange)="onMaxChange()" [min]="0" [max]="100000000" [(ngModel)]="maxValue" class="form-control" id="max" placeholder="đ1000.0000" type="number">
+                  </div>
+                </div>
+                <button (click)="filterPrice()" class="btn btn-light w-100 mb-2" type="button">Apply</button>
+                <button (click)="clearFilter()" class="btn btn-light w-100" type="button"> Clear </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </aside>
+
+      <main class="col-lg-9">
+        <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
+          <strong class="d-block py-2"> {{ totalItems }} Items </strong>
+          <div class="ms-auto ">
+            <!-- Sử dụng ngModel để theo dõi giá trị được chọn từ dropdown -->
+            <select class="form-select d-inline-block w-auto me-1" [(ngModel)]="selectedBrandName" (change)="getProductByBrandAndCate()">
+              <option *ngFor="let brand of brands" [value]="brand?.name">{{ brand?.name | titlecase }}</option>
+            </select>
+            <div class="btn-group">
+              <a href="#" class="btn btn-light" data-bs-toggle="tooltip" title="List view">
+                <i class="fa fa-bars"></i>
+              </a>
+              <a href="#" class="btn btn-light active" data-bs-toggle="tooltip" title="Grid view">
+                <i class="fa fa-th"></i>
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <div class="row"  >
+          <div *ngFor="let product of products | paginate: { itemsPerPage: 6, currentPage: pageCurrent }" class="col-lg-4 col-md-6 col-sm-6">
+            <figure class="card card-product-grid">
+              <a (click)="navigateDetails(product)">
+              <div class="img-wrap">
+                <img src="{{ product.img }}">
+              </div>
+              </a>
+              <figcaption class="info-wrap border-top">
+                <div class="price-wrap">
+                  <strong class="price"> {{ product?.price | currency:'VND' }} </strong>
+                </div>
+                <p class="title mb-2"> {{ formatTitle(product.name) }} </p>
+
+                <!-- <button [disabled]="currentUser?.role === 'admin'" (click)="addToCart(product)" class="btn btn-primary">Add to cart</button> -->
+                <a class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <hr *ngIf="products?.length">
+        <footer class="d-flex mt-4 justify-content-end">
+          <nav class="ms-3">
+            <pagination-controls (pageChange)="pageCurrent = $event"></pagination-controls>
+          </nav>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

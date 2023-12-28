@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Add new brand</h2>
+<hr>
+<mat-dialog-content>
+  <div class="modal-body">
+    <!-- Bạn có thể thêm biểu mẫu đăng ký vào đây -->
+    <form [formGroup]="addForm">
+
+      <div class="form-group">
+        <label for="imgURL">Hình Ảnh</label>
+        <input formControlName="imgURL" type="text" class="form-control" id="imgURL" placeholder="Nhập imgURL">
+        <div *ngIf="addForm.controls['imgURL'].errors && addForm.controls['imgURL'].dirty" class="text-danger">
+          <div *ngIf="addForm.controls['imgURL'].errors.required"> Image is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Tên Nhà Sản Xuất:</label>
+        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Nhập tên nhà sản xuất">
+        <div *ngIf="addForm.controls['name'].errors && addForm.controls['name'].dirty" class="text-danger">
+          <div *ngIf="addForm.controls['name'].errors.required"> Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="website">Website của Thương Hiệu:</label>
+        <input formControlName="website" type="text" class="form-control" id="website" placeholder="Nhập địa chỉ website">
+        <div *ngIf="addForm.controls['website'].errors && addForm.controls['website'].dirty" class="text-danger">
+          <div *ngIf="addForm.controls['website'].errors.required"> Website is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Mô Tả:</label>
+        <input formControlName="description" type="text" class="form-control" id="description" placeholder="Nhập mô tả">
+        <div *ngIf="addForm.controls['description'].errors && addForm.controls['description'].dirty" class="text-danger">
+          <div *ngIf="addForm.controls['description'].errors.required"> Description is required</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <!-- <button mat-button (click)="onNoClick()">Cancel</button> -->
+  <div class="text-center">
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="onNoClick()"
+      type="button"
+      class="btn btn-danger"> Cancel </button>
+
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="add()"
+      type="button"
+      class="btn btn-primary m-lg-2"> Submit </button>
+  </div>
+</mat-dialog-actions>
+<!-- [disabled]="registerForm.invalid" -->

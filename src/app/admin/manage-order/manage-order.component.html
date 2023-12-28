@@ -1,0 +1,52 @@
+<form action="" class="form-inline" method="post" role="form">
+  <!-- <button type="submit" (click)="add()" class="btn btn-primary">Add new</button> -->
+</form>
+
+
+
+<div class="mat-elevation-z8" id="father">
+  <table class="table" style="min-height: 500px;">
+    <thead class="head">
+      <tr>
+        <th>No.</th>
+        <th style="width: 300px;">Shipment Details</th>
+        <th style="width: 200px;">Note </th>
+        <th>Total Price</th>
+        <th style="width: 120px;">Created Time</th>
+        <th style="width: 200px;">Status</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let item of orders | paginate: { itemsPerPage: 5, currentPage: currentPage }; let i = index">
+          <td scope="row">{{ (currentPage - 1) * 5 + i + 1 }}</td>
+          <td>
+            <div>Người Nhận: {{item?.order_name}}</div>
+            <div>SĐT: {{item?.order_phone}}</div>
+            <div>Địa chỉ: {{item?.order_street}}, {{item?.order_wards}}, {{item?.order_district}}, {{item?.order_city}}</div>
+          </td>
+          <td>{{item?.note}}</td>
+          <td>{{item?.total | currency:'VND':'symbol':'1.0-0'}}</td>
+          <td>{{ item?.order_updated_time | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>
+            {{
+              item?.status === 0 ? 'Chờ xác nhận đơn hàng' :
+              item?.status === 1 ? 'Đã xác nhận' :
+              item?.status === 2 ? 'Đang giao hàng' :
+              item?.status === 3 ? 'Giao thành công' :
+              item?.status === 4 ? 'Hủy' :
+              'Trạng thái không xác định'
+            }}
+          </td>
+          <td>
+            <button (click)="showOrder(item)" class="btn btn-primary mr-1" >Show</button>
+            <button class="btn btn-danger mr-1" (click)="deleteProduct(item)">Cancel</button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="pagination">
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    <span style="margin-left: 6px; margin-top: 4px;"> {{ orders?.length }} Items </span>
+  </div>
+</div>
+

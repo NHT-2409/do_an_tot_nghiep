@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Edit Brand</h2>
+<hr>
+<mat-dialog-content>
+  <form [formGroup]="editForm">
+    <div class="form-outline mb-4">
+      <input formControlName="imgURL" type="text" id="form3Example3" class="form-control form-control-lg"
+        placeholder="imgURL" />
+
+        <div *ngIf="editForm.controls['imgURL']?.errors && editForm.controls['imgURL'].dirty" class="text-danger">
+          <div *ngIf="editForm.controls['imgURL']?.errors?.required">Image is required</div>
+        </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input formControlName="name" type="text" id="form3Example3" class="form-control form-control-lg"
+        placeholder="Name" />
+
+        <div *ngIf="editForm.controls['name']?.errors && editForm.controls['name'].dirty" class="text-danger">
+          <div *ngIf="editForm.controls['name']?.errors?.required">Name is required</div>
+        </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input formControlName="website" type="text" id="form3Example3" class="form-control form-control-lg"
+        placeholder="Website" />
+
+        <div *ngIf="editForm.controls['website']?.errors && editForm.controls['website'].dirty" class="text-danger">
+          <div *ngIf="editForm.controls['website']?.errors?.required">Website is required</div>
+        </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input formControlName="description" type="text" id="form3Example3" class="form-control form-control-lg"
+        placeholder="Description" />
+
+        <div *ngIf="editForm.controls['description']?.errors && editForm.controls['description'].dirty" class="text-danger">
+          <div *ngIf="editForm.controls['description']?.errors?.required">Description is required</div>
+        </div>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <div class="text-center">
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="onNoClick()"
+      type="button"
+      class="btn btn-danger"> Cancel </button>
+
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="edit()"
+      [disabled]="editForm.invalid"
+      type="button"
+      class="btn btn-primary m-lg-2"> Submit </button>
+  </div>
+</mat-dialog-actions>

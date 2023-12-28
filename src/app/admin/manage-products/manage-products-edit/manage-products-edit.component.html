@@ -1,0 +1,86 @@
+<h2 mat-dialog-title>Edit Products</h2>
+<hr>
+<mat-dialog-content>
+  <form [formGroup]="editForm">
+    <div class="form-group">
+      <label for="img">Hình ảnh</label>
+      <input formControlName="img" type="text" class="form-control" name="img" id="img" accept="image/*">
+    </div>
+    <div class="form-group">
+      <label for="name">Tên sản phẩm:</label>
+      <input formControlName="name" type="text" class="form-control" id="name" placeholder="Nhập tên sản phẩm">
+      <div *ngIf="editForm.controls['name'].errors && editForm.controls['name'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['name'].errors.required"> Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="qty">Quanlity:</label>
+      <input [min]="0" formControlName="qty" type="number" id="qty" class="form-control" placeholder="Quanlity" />
+      <div *ngIf="editForm.controls['qty'].errors && editForm.controls['qty'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['qty'].errors.required"> Quanlity is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input [min]="0" formControlName="price" type="number" id="price" class="form-control" placeholder="Price" />
+      <div *ngIf="editForm.controls['price'].errors && editForm.controls['price'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['price'].errors.required"> Price is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="promotion">Promotion:</label>
+      <input formControlName="promotion" type="text" class="form-control" id="promotion" placeholder="Nhập Promotion">
+      <div *ngIf="editForm.controls['promotion'].errors && editForm.controls['promotion'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['promotion'].errors.required"> Promotion is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input formControlName="description" type="text" class="form-control" id="description" placeholder="Nhập Description">
+      <div *ngIf="editForm.controls['description'].errors && editForm.controls['description'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['description'].errors.required"> Description is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="categoryId">Category</label>
+      <select formControlName="categoryId" class="form-control">
+        <option *ngFor="let category of categories" [value]="category?.id">{{ category?.name | titlecase }}</option>
+      </select>
+      <div *ngIf="editForm.controls['categoryId'].errors && editForm.controls['categoryId'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['categoryId'].errors.required"> Category is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="brandId">Brand</label>
+      <select formControlName="brandId" class="form-control">
+        <option *ngFor="let brand of brands" [value]="brand?.id">{{ brand?.name | titlecase }}</option>
+      </select>
+      <div *ngIf="editForm.controls['brandId'].errors && editForm.controls['brandId'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['brandId'].errors.required"> Brand is required</div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <div class="text-center">
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="onNoClick()"
+      type="button"
+      class="btn btn-danger"> Cancel </button>
+
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="edit()"
+      [disabled]="editForm.invalid"
+      type="button"
+      class="btn btn-primary m-lg-2"> Submit </button>
+  </div>
+</mat-dialog-actions>

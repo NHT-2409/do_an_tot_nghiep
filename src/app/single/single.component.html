@@ -1,0 +1,112 @@
+<div class="overflow-auto">
+  <app-header></app-header>
+  <section class="bg-primary padding-y-sm">
+    <div class="container">
+      <ol class="breadcrumb ondark mb-0">
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/products">Products</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Product</li>
+      </ol>
+
+    </div>
+    </section>
+    <section class="padding-y">
+    <div class="container">
+
+    <div class="row">
+    <aside class="col-lg-6">
+      <article class="gallery-wrap">
+      <div class="img-big-wrap img-thumbnail">
+        <a data-fslightbox="mygalley" data-type="image" href="{{ product?.img }}">
+        <img height="560" src="{{ product?.img }}">
+        </a>
+      </div>
+      <div class="thumbs-wrap">
+        <a data-fslightbox="mygalley" data-type="image" href="{{ product?.img }}" class="item-thumb">
+        <img width="60" height="60" src="{{ product?.img }}">
+        </a>
+        <a data-fslightbox="mygalley" data-type="image" href="{{ product?.img }}" class="item-thumb">
+        <img width="60" height="60" src="{{ product?.img }}">
+        </a>
+        <a data-fslightbox="mygalley" data-type="image" href="{{ product?.img }}" class="item-thumb">
+        <img width="60" height="60" src="{{ product?.img }}">
+        </a>
+        <a data-fslightbox="mygalley" data-type="image" href="{{ product?.img }}" class="item-thumb">
+        <img width="60" height="60" src="{{ product?.img }}">
+        </a>
+      </div>
+      </article>
+    </aside>
+    <main class="col-lg-6">
+      <article class="ps-lg-3">
+      <h4 class="title text-dark"> {{ product?.name }} </h4>
+      <div class="rating-wrap my-3">
+        <ul class="rating-stars">
+        </ul>
+        <b class="label-rating text-warning"> 4.5</b>
+        <i class="dot"></i>
+        <span class="label-rating text-muted"> <i class="fa fa-shopping-basket"></i> 154 orders </span>
+        <i class="dot"></i>
+        <span class="label-rating text-success">In stock</span>
+      </div>
+
+      <div class="mb-3">
+        <var class="price h5"> {{ product?.price | currency:'VND' }} </var>
+        <span class="text-muted">/per box</span>
+      </div>
+
+      <p>
+        {{ product?.description }}
+      </p>
+
+      <dl class="row">
+        <dt class="col-3">Category</dt>
+        <dd class="col-9">{{product?.categoryId.name}}</dd>
+
+        <dt class="col-3">Brand</dt>
+        <dd class="col-9">{{product?.brandId.name}} </dd>
+
+        <dt class="col-3">Promotion</dt>
+        <dd class="col-9">Tặng {{product?.promotion}} </dd>
+
+        <dt class="col-3">Quantity</dt>
+        <dd class="col-9">{{product?.qty}} </dd>
+      </dl>
+
+      <hr>
+
+      <div class="row mb-4">
+
+        <div class="col-md-4 col-6 mb-3">
+        <label class="form-label d-block">Quantity</label>
+        <div class="input-group input-spinner">
+          <button [disabled]="!currentUser || currentUser?.role === 'admin'" (click)="handelQuantity('down')" class="btn btn-icon btn-light" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#999" viewBox="0 0 24 24">
+            <path d="M19 13H5v-2h14v2z"></path>
+            </svg>
+          </button>
+          <input [disabled]="!currentUser || currentUser?.role === 'admin'" [(ngModel)]="quantity" class="form-control text-center" placeholder="" value="1">
+          <button [disabled]="!currentUser || currentUser?.role === 'admin'" (click)="handelQuantity('up')" class="btn btn-icon btn-light" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#999" viewBox="0 0 24 24">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+            </svg>
+          </button>
+        </div>
+        </div>
+      </div>
+
+      <!-- Thêm sự kiện (click) để gọi hàm navigateToCart() -->
+      <button [disabled]="currentUser?.role === 'admin' || quantityExceedsAvailable || product?.qty === 0" class="btn btn-warning" (click)="addToCart()"> Buy now </button>
+      <!-- <button [disabled]="!currentUser || currentUser?.role === 'admin'" (click)="addToCart()" class="btn  btn-primary"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </button>
+      <a class="btn  btn-light"> <i class="me-1 fa fa-heart"></i> Save </a> -->
+
+      </article>
+    </main>
+    </div>
+    </div>
+    </section>
+    <section class="padding-y bg-light border-top">
+    </section>
+    <app-footer></app-footer>
+
+</div>

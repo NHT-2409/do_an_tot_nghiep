@@ -1,0 +1,93 @@
+<app-header></app-header>
+
+<div class="container mt-5">
+  <div class="row">
+      <div style="margin-left: 88px; padding-right: 25px;" class=" col-lg-4 pb-5">
+          <!-- Account Sidebar-->
+          <div class="author-card pb-3">
+              <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"></div>
+              <div class="author-card-profile">
+                  <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
+                  </div>
+                  <div *ngFor="let item of currentUser" class="author-card-details">
+                    <h5 class="author-card-name text-lg">{{item.name}}</h5><span class="author-card-position">Create {{ item?.created_time | date: 'EEEE, dd/MM/yyyy ' }}
+                    </span>
+                </div>
+              </div>
+          </div>
+          <div class="wizard">
+              <nav class="list-group list-group-flush">
+                <a routerLink="/orders-list" class="list-group-item active" routerLinkActive="active">
+                  <i class="fe-icon-shopping-bag mr-1 text-muted"></i>Orders List
+                </a>
+                  <a routerLink="/user-info" class="list-group-item" routerLinkActive="active">
+                    <i class="fe-icon-user text-muted"></i>Profile Settings
+                </a>
+
+              </nav>
+          </div>
+      </div>
+      <!-- Profile Settings-->
+      <div class="col-lg-6 pb-5">
+        <div class="right-side">
+          <div class="receipt">
+            <h4 class="receipt-heading"><b>Address information</b></h4>
+            <div>
+              <table class="table">
+                <tr>
+                  <td>??</td>
+                </tr>
+                <tr>
+                  <td>Discount</td>
+                </tr>
+                <tr class="total">
+                  <td>Total</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="receipt">
+            <h4 class="receipt-heading">Receipt Summary</h4>
+            <div *ngFor="let item of orderProductDetails">
+              <table class="table">
+                <tr>
+                  <td>
+                    <img [src]="item.product_id?.img" alt="" style="float: left; width: 50px;">
+                    <div style="padding-top: 14px;">{{item.product_id.name}}</div>
+                  </td>
+                  <td class="price">x{{item?.qty}}</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class="price">{{item?.total | currency:'VND':'symbol':'1.0-0'}}</td>
+                </tr>
+              </table>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <h3 class="font-weight-bold">Total</h3>
+              <h3 class="font-weight-bold">{{ getTotalPrice() | currency:'VND':'symbol':'1.0-0' }}</h3>
+            </div>
+          </div>
+
+          <div class="payment-info">
+            <h3 class="payment-heading">Payment Information</h3>
+            <form
+              class="form-box"
+              enctype="text/plain"
+              method="get"
+              target="_blank"
+            >
+              <button class="btn">
+                <i class="fa-solid fa-lock"></i> Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+<app-footer></app-footer>

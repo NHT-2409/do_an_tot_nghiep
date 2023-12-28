@@ -1,0 +1,96 @@
+<header class="section-header">
+  <section class="header-main">
+    <div class="container">
+      <div class="row gy-3 align-items-center">
+        <div class="col-lg-2 col-sm-4 col-4">
+          <a class="font-weight-bold p-0" routerLink="/home" class="navbar-brand">
+            <h3 class="font-weight-bold"> HT's Store </h3>
+          </a>
+        </div>
+        <div class="order-lg-last col-lg-5 col-sm-8 col-8">
+          <div *ngIf="currentUser" class="float-end">
+            <a (click)="userinfo()" *ngIf="currentUser" class="btn btn-light">
+              <i class="fa-solid fa-user"></i>
+              <span style="margin-left: 8px;">{{currentUser?.name }}</span>
+            </a>
+          </div>
+          <div class="float-end mr-4">
+            <a (click)="navigateAdminPage()" *ngIf="isAdmin" class="btn btn-light">
+              <i class="fa fa-user-shield"></i> <span class="ms-1"> Admin page </span>
+            </a>
+            <a *ngIf="!currentUser" (click)="login()" class="btn btn-light">
+              <i class="fa fa-user"></i>  <span class="ms-1 d-none d-sm-inline-block">Sign in  </span>
+            </a>
+            <a (click)="openCart()" *ngIf="currentUser?.role !== 'admin' " matBadgeSize="small" [matBadge]="cartItemsQuantity" class="btn btn-light">
+              <i class="fa fa-shopping-cart"></i> <span class="ms-1">My cart </span>
+            </a>
+
+
+            <a (click)="logOut()" *ngIf="currentUser" class="btn btn-light">
+              <i class="fa fa-sign-out-alt"></i> <span class="ms-1 d-none d-sm-inline-block">Sign out </span>
+            </a>
+
+          </div>
+        </div>
+         <!-- col end.// -->
+        <div class="col-lg-5 col-md-12 col-12">
+          <form action="#" class="">
+                  <div class="input-group">
+                    <input type="search" class="form-control" style="width:55%" placeholder="Search">
+                    <select class="form-select">
+                      <option value="">All type</option>
+                      <option value="codex">Special</option>
+                      <option value="comments">Only best</option>
+                      <option value="content">Latest</option>
+                    </select>
+                    <button class="btn btn-primary">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div> <!-- input-group end.// -->
+                </form>
+        </div> <!-- col end.// -->
+
+      </div> <!-- row end.// -->
+    </div> <!-- container end.// -->
+  </section> <!-- header-main end.// -->
+  <nav class="navbar navbar-light bg-primary border-top navbar-expand-lg">
+    <div class="container">
+      <button class="navbar-toggler border" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_main">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar_main">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link ps-0" routerLink="/home"> Home </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Contact Us</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Menu item</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Menu name</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">
+              Others
+            </a>
+            <ul class="dropdown-menu">
+              <li> <a class="dropdown-item" href="#">Submenu one </a> </li>
+              <li> <a class="dropdown-item" href="#">Submenu two</a> </li>
+              <li> <a class="dropdown-item" href="#">Submenu three</a> </li>
+            </ul>
+          </li> -->
+        </ul>
+      </div> <!-- collapse end.// -->
+    </div> <!-- container end.// -->
+  </nav> <!-- navbar end.// -->
+</header> <!-- section-header end.// -->
