@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Add NEWS</h2>
+<hr>
+<mat-dialog-content>
+  <form [formGroup]="addNewForm" method="post">
+    <div class="form-group">
+      <label for="imageUrl">Hình ảnh</label>
+      <input formControlName="imageUrl" type="text" class="form-control" name="imageUrl" id="imageUrl" accept="image/*">
+    </div>
+    <div class="form-group">
+      <label for="title">Nội Dung Tiêu Đề:</label>
+      <input formControlName="title" type="text" class="form-control" id="title" placeholder="Nhập Nội Dung Tiêu Đề">
+      <div *ngIf="addNewForm.controls['title'].errors && addNewForm.controls['title'].dirty" class="text-danger">
+        <div *ngIf="addNewForm.controls['title'].errors.required"> Title is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Mô tả:</label>
+      <input formControlName="description" type="text" class="form-control" id="description" placeholder="Nhập Description">
+      <div *ngIf="addNewForm.controls['description'].errors && addNewForm.controls['description'].dirty" class="text-danger">
+        <div *ngIf="addNewForm.controls['description'].errors.required"> Description is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="admin_id">Category</label>
+      <select formControlName="admin_id" (change)="onChangeadmin()" class="form-control">
+        <option value="">-- Select Category --</option>
+        <option *ngFor="let admin of admins" [value]="admin?.id">{{ admin?.name | titlecase }}</option>
+      </select>
+      <div *ngIf="addNewForm.controls['admin_id'].errors && addNewForm.controls['admin_id'].dirty" class="text-danger">
+        <div *ngIf="addNewForm.controls['admin_id'].errors.required"> Admin is required</div>
+      </div>
+    </div>
+
+
+
+  </form>
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <div class="text-center">
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="onNoClick()"
+      type="button"
+      class="btn btn-danger"> Cancel </button>
+
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="add()"
+      [disabled]="addNewForm.invalid"
+      type="button"
+      class="btn btn-primary m-lg-2"> Submit </button>
+  </div>
+</mat-dialog-actions>
+

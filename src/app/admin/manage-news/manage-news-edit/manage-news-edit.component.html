@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Edit News</h2>
+<hr>
+<mat-dialog-content>
+  <form [formGroup]="editForm">
+    <div class="form-group">
+      <label for="imageUrl">Hình ảnh</label>
+      <input formControlName="imageUrl" type="text" class="form-control" name="imageUrl" id="imageUrl" >
+    </div>
+
+    <div class="form-group">
+      <label for="title">Tiêu Đề:</label>
+      <input formControlName="title" type="text" class="form-control" id="title" placeholder="Nhập Nội Dung Tiêu Đề">
+      <div *ngIf="editForm.controls['title'].errors && editForm.controls['title'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['title'].errors.required"> Title is required</div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input formControlName="description" type="text" class="form-control" id="description" placeholder="Nhập Description">
+      <div *ngIf="editForm.controls['description'].errors && editForm.controls['description'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['description'].errors.required"> Description is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="admin_id">Admin</label>
+      <select formControlName="admin_id" class="form-control">
+        <option *ngFor="let admin of admins" [value]="admin?.id">{{ admin?.name | titlecase }}</option>
+      </select>
+      <div *ngIf="editForm.controls['admin_id'].errors && editForm.controls['admin_id'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['admin_id'].errors.required"> Admin is required</div>
+      </div>
+    </div>
+
+
+  </form>
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <div class="text-center">
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="onNoClick()"
+      type="button"
+      class="btn btn-danger"> Cancel </button>
+
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="edit()"
+      [disabled]="editForm.invalid"
+      type="button"
+      class="btn btn-primary m-lg-2"> Submit </button>
+  </div>
+</mat-dialog-actions>

@@ -1,0 +1,79 @@
+<app-header></app-header>
+
+
+<div *ngFor="let item of currentUser" class="container mt-5">
+  <div class="row">
+      <div class="col-lg-4 pb-5">
+          <div class="author-card pb-3">
+              <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"></div>
+              <div class="author-card-profile">
+                  <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
+                  </div>
+                  <div  class="author-card-details">
+                      <h5 class="author-card-name text-lg">{{item.name}}</h5><span class="author-card-position">Create {{ item?.created_time | date: 'EEEE, dd/MM/yyyy ' }}
+                      </span>
+                  </div>
+              </div>
+          </div>
+          <div class="wizard">
+              <nav class="list-group list-group-flush">
+                <a routerLink="/orders-list" class="list-group-item" routerLinkActive="active">
+                  <i class="fe-icon-shopping-bag mr-1 text-muted"></i>Orders List
+                </a>
+                  <a routerLink="/user-info" class="list-group-item active" routerLinkActive="active">
+                    <i class="fe-icon-user text-muted"></i>Profile Settings
+                </a>
+
+              </nav>
+          </div>
+      </div>
+
+
+      <div class="col-lg-7 pb-5">
+        <form class="row">
+            <div class="col-md-7 mb-3">
+                <div class="form-group">
+                    <label for="account-fn">Name</label>
+                    <input class="form-control" type="text" id="account-fn" value="{{item.name}}" disabled>
+                </div>
+            </div>
+            <div class="col-md-7 mb-3">
+                <div class="form-group">
+                    <label for="account-ln">Address</label>
+                    <input class="form-control" type="text" id="account-ln" value="{{item.address}}" disabled>
+                </div>
+            </div>
+            <div class="col-md-7 mb-3">
+                <div class="form-group">
+                    <label for="account-email">E-mail</label>
+                    <input class="form-control" type="email" id="account-email" value="{{item.email}}" disabled>
+                </div>
+            </div>
+            <div class="col-md-7 mb-3">
+                <div class="form-group">
+                    <label for="account-phone">Phone Number</label>
+                    <input class="form-control" type="text" id="account-phone" value="+84{{item.phone}}" disabled>
+                </div>
+            </div>
+            <div class="col-md-7 mb-3">
+                <div class="form-group">
+                    <label for="account-pass">Password</label>
+                    <input class="form-control" type="password" value="{{item.password}}" id="account-pass" disabled>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr class="mt-2 mb-3">
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                    <button class="btn btn-style-1 btn-primary" type="button" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfully.">
+                        Update Profile
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+  </div>
+</div>
+
+
+<app-footer></app-footer>

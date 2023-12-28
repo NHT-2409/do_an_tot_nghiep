@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Edit Users</h2>
+<hr>
+<mat-dialog-content>
+  <form [formGroup]="editForm">
+    <div class="form-group">
+      <label for="name">Họ và tên:</label>
+      <input formControlName="name" type="text" class="form-control" id="name" placeholder="Nhập họ và tên">
+      <div *ngIf="editForm.controls['name'].errors && editForm.controls['name'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['name'].errors.required"> Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input formControlName="email" type="email" class="form-control" id="email" placeholder="Nhập email">
+      <div *ngIf="editForm.controls['email'].errors && editForm.controls['email'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['email'].errors.required"> Email is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Mật khẩu:</label>
+      <input formControlName="password" type="text" class="form-control" id="password" placeholder="Nhập mật khẩu">
+      <div *ngIf="editForm.controls['password'].errors && editForm.controls['password'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['password'].errors.required"> Password is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="phone">Điện thoại:</label>
+      <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+      <div *ngIf="editForm.controls['phone'].errors && editForm.controls['phone'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['phone'].errors.required"> Phone is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address">Địa chỉ:</label>
+      <input formControlName="address" type="text" class="form-control" id="address" placeholder="Nhập địa chỉ">
+      <div *ngIf="editForm.controls['address'].errors && editForm.controls['address'].dirty" class="text-danger">
+        <div *ngIf="editForm.controls['address'].errors.required"> Address is required</div>
+      </div>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <div class="text-center">
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="onNoClick()"
+      type="button"
+      class="btn btn-danger"> Cancel </button>
+
+    <button
+      [style]="{
+        'min-width': '80px'
+      }"
+      (click)="onEdit()"
+      [disabled]="editForm.invalid"
+      type="button"
+      class="btn btn-primary m-lg-2"> Submit </button>
+  </div>
+</mat-dialog-actions>

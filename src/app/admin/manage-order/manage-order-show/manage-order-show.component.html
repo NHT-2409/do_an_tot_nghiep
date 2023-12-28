@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>Edit Products</h2>
+<hr>
+  <table class="table" style="max-height: 500px;">
+    <thead class="head">
+      <tr>
+        <th>No.</th>
+        <th>Image</th>
+        <th style="width: 300px;">Name product</th>
+        <th style="width: 120px;">Price product </th>
+        <th style="width: 50px;">Quantity product</th>
+        <th style="width: 50px;">Quantity order</th>
+        <th style="width: 400px;">Promotion</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let item of orders | paginate: { itemsPerPage: 5, currentPage: currentPage }; let i = index">
+          <td scope="row">{{ (currentPage - 1) * 5 + i + 1 }}</td>
+          <td>
+            <img style="width: 50px; height: 50px; border-radius: 9rem;" src="{{ item?.productId.img }}">
+          </td>
+          <td>{{item?.productId.name}}</td>
+          <td>{{item?.productId.price | currency:'VND':'symbol':'1.0-0'}}</td>
+          <td>{{item?.productId.qty}}</td>
+          <td>{{item?.qty}}</td>
+          <td>{{item?.promotion}}</td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="pagination">
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    <span style="margin-left: 6px; margin-top: 4px;"> {{ orders?.length }} Items </span>
+  </div>
+  <hr>
+  <mat-dialog-actions class="d-flex justify-content-end">
+  <div class="text-center">
+    <button
+      [style]="{
+        'min-width': '100px'
+      }"
+      (click)="onNoClick()"
+      type="button"
+      class="btn btn-danger"> Cancel
+    </button>
+    <button
+    [style]="{
+      'min-width': '100px'
+    }"
+    (click)="edit(order, 1)"
+    type="button"
+    class="btn btn-primary m-lg-2"> Đã xác nhận
+  </button>
+
+  <button
+    [style]="{
+      'min-width': '100px'
+    }"
+    (click)="edit(order, 2)"
+    type="button"
+    class="btn btn-primary m-lg-2"> Đang giao hàng
+  </button>
+
+  <button
+    [style]="{
+      'min-width': '100px'
+    }"
+    (click)="edit(order, 3)"
+    type="button"
+    class="btn btn-primary m-lg-2"> Giao thành công
+  </button>
+
+  </div>
+ </mat-dialog-actions>

@@ -1,0 +1,48 @@
+/* news.component.scss */
+.containers {
+  margin-top: 20px;
+  .cards-decks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .cards {
+    cursor: pointer;
+    width: 25%; /* Đặt chiều rộng của card */
+    margin-bottom: 20px; /* Đặt khoảng cách giữa các card */
+    margin-right: 20px;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .cards-img-top {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .cards-body {
+    padding: 1rem;
+  }
+
+  .cards-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .cards-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Hiển thị tối đa 3 dòng */
+    -webkit-box-orient: vertical;
+  }
+}
+
+.first-card {
+  margin-left: 90px;
+}

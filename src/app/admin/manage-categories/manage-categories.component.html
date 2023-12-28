@@ -1,0 +1,42 @@
+<form action="" class="form-inline" method="post" role="form">
+  <button type="submit" (click)="addCategory()" class="btn btn-primary">Add new</button>
+</form>
+
+<hr>
+
+<div class="mat-elevation-z8" id="father">
+  <table class="table" style="min-height: 500px;">
+    <thead class="head">
+      <tr>
+        <th>No.</th>
+        <th style="width: 300px;">Name Category</th>
+        <th style="width: 300px;">Slug Category</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let item of dataCategory | paginate: { itemsPerPage: 5, currentPage: currentPage }; let i = index">
+          <td scope="row">{{ (currentPage - 1) * 5 + i + 1 }}</td>
+          <td>{{item?.name}}</td>
+          <td>{{item?.slug}}</td>
+          <td>
+            <ng-container *ngIf="item?.status === 1; else zeroStatus">
+              <i class="fa-solid fa-check"></i>
+            </ng-container>
+            <ng-template #zeroStatus>
+              <i class="fa-solid fa-xmark"></i>
+            </ng-template>
+          </td>
+          <td>
+            <button class="btn btn-primary mr-1" (click)="updateCategory(item)" >Update</button>
+            <button class="btn btn-danger mr-1" (click)="deleteCategory(item.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="pagination">
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    <span style="margin-left: 6px; margin-top: 4px;"> {{ dataCategory?.length }} Items </span>
+  </div>
+</div>
+
