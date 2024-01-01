@@ -15,7 +15,9 @@ export class AuthServiceService {
   }
 
 
-  constructor(private cookieService: CookieService) {
+  constructor(
+    private cookieService: CookieService,
+    ) {
     this.loggedIn = this.cookieService.get('loggedIn') === 'true';
     const userData = this.cookieService.get('userData');
     if (userData) {
@@ -30,10 +32,11 @@ export class AuthServiceService {
   setUserData(userData: any) {
     // Lưu thông tin đăng nhập vào cookie
     this.cookieService.set('loggedIn', 'true'); // Đánh dấu đã đăng nhập
-    this.cookieService.set('userData', JSON.stringify(userData)); // Lưu thông tin user (chuyển thành chuỗi JSON)
+    this.cookieService.set('userData', JSON.stringify(userData)); // Chuyển đối tượng thành chuỗi JSON và lưu thông tin user
     this.userDataSubject.next(userData); // Cập nhật BehaviorSubject để thông báo rằng đã có dữ liệu người dùng mới
     this.loggedIn = true;
   }
+
 
   getUserData(): any {
     return this.userDataSubject.value; // Trả về giá trị hiện tại của BehaviorSubject

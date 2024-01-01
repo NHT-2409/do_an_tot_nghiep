@@ -66,6 +66,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BillingComponent } from './user-profile/billing/billing.component';
+import { BillingDetailComponent } from './user-profile/billing/billing-detail/billing-detail.component';
 
 
 
@@ -109,6 +110,7 @@ import { BillingComponent } from './user-profile/billing/billing.component';
     ManageOrderShowComponent,
     UserProfileComponent,
     BillingComponent,
+    BillingDetailComponent,
 
 
   ],

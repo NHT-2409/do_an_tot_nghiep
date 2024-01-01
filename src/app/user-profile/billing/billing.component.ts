@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { CartService } from 'src/app/service/cart.service';
 import { LoadingService } from 'src/app/service/loading.service';
 import { OrderdetailService } from 'src/app/service/orderdetail.service';
 import { UserService } from 'src/app/service/user.service';
+import { BillingDetailComponent } from './billing-detail/billing-detail.component';
 
 @Component({
   selector: 'app-billing',
@@ -24,6 +26,7 @@ export class BillingComponent implements OnInit {
     private loadingService: LoadingService,
     private orderdetailService: OrderdetailService,
     private cartService: CartService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -47,16 +50,36 @@ export class BillingComponent implements OnInit {
     };
 
     this.userService.getUserInfo(user).subscribe((res) => {
-
-      if (Array.isArray(res)) {
-        this.currentUser = res;
-      } else {
-        this.cartService.cartData$.subscribe((cartData) => {
-          this.orderProductDetails = cartData;
-        });
-        // Nếu phản hồi không phải là mảng, biến nó thành mảng với một phần tử
-        this.currentUser = [res];
-      }
+        console.log("🚀 ~ BillingComponent ~ this.currentUser:", res)
+        this.orderdetailService.getInforById(res.id).subscribe((data: any) => {
+          this.orderProductDetails = data;
+          console.log("🤜 ~ this.userOrders:", this.orderProductDetails)
+        })
     });
   }
+
+  getStatusName(status: number): string {
+    switch (status) {
+      case 0:
+        return 'Chờ xác nhận';
+      case 1:
+        return 'Đã xác nhận';
+      case 2:
+        return 'Đang giao';
+      case 3:
+        return 'Đã giao thành công';
+      default:
+        return 'Trạng thái không xác định';
+    }
+  }
+  detail(item: any) {
+    const dialogRef = this.dialog.open(BillingDetailComponent, {
+      width: '600px',
+      data: {
+        orderProductDetails: item,
+      }
+    });
+    console.log("🤜 ~ item:", item)
+    }
+
 }
