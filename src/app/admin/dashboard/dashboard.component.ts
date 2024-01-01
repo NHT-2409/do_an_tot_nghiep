@@ -8,6 +8,10 @@ import { BrandService } from 'src/app/service/brand.service';
 import { NewsService } from 'src/app/service/news.service';
 import { OrderService } from 'src/app/service/order.service';
 import { LoadingService } from 'src/app/service/loading.service';
+import { ToastService } from 'src/app/service/toast.service';
+import { Route, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthServiceService } from 'src/app/service/auth-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,10 +42,21 @@ export class DashboardComponent implements OnInit {
     private newsService: NewsService,
     private orderService: OrderService,
     private loadingService: LoadingService,
+    private authService: AuthServiceService,
+    private cookieService: CookieService,
+    private router: Router,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
     this.getData();
+  }
+
+  logOut() {
+    this.authService.logout(); // Gọi phương thức logout từ AuthService
+    this.cookieService.deleteAll();
+    this.router.navigate(['/login']);
+    this.toastService.show('Logout successfully!');
   }
 
   getData() {

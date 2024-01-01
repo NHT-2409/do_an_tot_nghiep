@@ -20,12 +20,14 @@ import { CartService } from './service/cart.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import { BillingComponent } from './user-profile/billing/billing.component';
+import { AdminGuard } from './admin.guard';
+import { LoginGuard } from './login.guard';
 
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
   {path: 'shop', component: ShopComponent},
@@ -47,7 +49,7 @@ const routes: Routes = [
   {path: 'home/products', component: ProductsComponent},
   {path: 'home/products/:category', component: ProductsComponent},
 
-  {path: 'admin', children: [
+  {path: 'admin', canActivate: [AdminGuard], children: [
     {path: '', component: DashboardComponent},
     {path: 'edit/:id', component: ManageUsersEditComponent},
     {path: 'add', component: ManageUsersAddComponent}

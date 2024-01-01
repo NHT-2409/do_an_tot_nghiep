@@ -82,7 +82,7 @@ getDiscountPrice(): number {
 
 
 
-edit(idOder: any) {
+  edit(idOder: any) {
     // Kiểm tra xem cartData có dữ liệu không
     if (this.cartData.length > 0) {
       const userId = idOder[0].users_id.id; // Lấy giá trị của userId
@@ -102,48 +102,18 @@ edit(idOder: any) {
       };
 
       // Gọi API thêm đơn hàng
-      this.orderService.addOrder(newProduct).subscribe(
-        (res) => {
-        },
-        (err) => {
-          switch (err?.error?.text) {
-            case "inserted": {
-              // Kiểm tra xem cartData có dữ liệu không
-            if (this.cartData.length > 0) {
-              this.orderService.GetOrderById(userId).subscribe(
-                (res) => {
-                  console.log("🚀 ~ CheckoutComponent ~ res:", res)
-                  const orderId = res.id;
-                  console.log("🚀 ~ CheckoutComponent ~ orderId:", orderId)
-                  // Gọi hàm InsertOrderProductDetail cho mỗi sản phẩm trong giỏ hàng
-                  this.cartData.forEach((cartItem: any) => {
-                      const orderProductDetail = {
-                          productId: cartItem.product_id.id,
-                          orderId: orderId,
-                          qty: cartItem.qty,
-                      };
-                      console.log("🚀 ~ CheckoutComponent ~ orderProductDetail:", orderProductDetail)
-                      this.orderdetailService.addOrderDetail(orderProductDetail).subscribe(
-                        (res) => {},(err)=> {
-                          switch (err?.error?.text) {
-                            case "inserted": {
-                              this.toastService.show(`Order successfully!`);
-                              this.router.navigate(["/thankyou"]);
-                              break;
-                            }
-                          }
-                        });
-                  });
-                })
-              break;
-            }
+      this.orderService.addOrder(newProduct).subscribe((res:any) => {
+      }, (err) => {
+        switch(err?.error?.text) {
+          case "inserted": {
+            this.toastService.show("Đặt hàng thành công");
+            this.router.navigate(['/thankyou']);
+            break;
           }
         }
       });
     }
-}
-
-
+  }
 
 
 }

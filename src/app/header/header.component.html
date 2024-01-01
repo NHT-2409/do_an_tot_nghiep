@@ -19,7 +19,7 @@
               <i class="fa fa-user-shield"></i> <span class="ms-1"> Admin page </span>
             </a>
             <a *ngIf="!currentUser" (click)="login()" class="btn btn-light">
-              <i class="fa fa-user"></i>  <span class="ms-1 d-none d-sm-inline-block">Sign in  </span>
+              <i class="fa fa-user"></i>  <span class="ms-1 d-none d-sm-inline-block">Sign in</span>
             </a>
             <a (click)="openCart()" *ngIf="currentUser?.role !== 'admin' " matBadgeSize="small" [matBadge]="cartItemsQuantity" class="btn btn-light">
               <i class="fa fa-shopping-cart"></i> <span class="ms-1">My cart </span>

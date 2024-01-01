@@ -30,6 +30,9 @@ export class OrderService {
     return this.httpClient.post(this.apiURL + '/InsertOrder',order);
   }
 
+  deleteOrder(order: any) {
+    return this.httpClient.delete(this.apiURL + `/DeleteOrder/${order}`);
+  }
 
   updateStatus(order: any) {
     return this.httpClient.put(this.apiURL + `/UpdateStatus?orderId=${order.orderId}&status=${order.status}&userId=${order.userId}`,order);

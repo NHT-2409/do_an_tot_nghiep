@@ -66,20 +66,20 @@ export class ManageOrderComponent {
       },
     });
 
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     this.productService.deleteProduct(item?.id).subscribe(res =>{
-    //     }, (err) => {
-    //       switch(err?.error?.text) {
-    //         case 'deleted': {
-    //           this.toastService.show(`Delete ${item?.name} successfully!`);
-    //           this.getProducts();
-    //           break;
-    //         }
-    //       }
-    //     })
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.orderService.deleteOrder(item?.id).subscribe(res =>{
+        }, (err) => {
+          switch(err?.error?.text) {
+            case 'deleted': {
+              this.toastService.show(`Delete ${item?.name} successfully!`);
+              this.getOrders();
+              break;
+            }
+          }
+        })
+      }
+    });
   }
 
 }
