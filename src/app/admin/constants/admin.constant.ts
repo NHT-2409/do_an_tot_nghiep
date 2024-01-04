@@ -7,5 +7,6 @@ export enum NavItems {
   ManageStores = 'Manage Stores',
   ManageNews = 'Manage News',
   ManageOrder = 'Manage Order',
+  ManageStatistical = 'Manage Statistical',
 }
 

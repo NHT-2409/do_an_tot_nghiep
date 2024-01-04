@@ -21,9 +21,8 @@ export class OrderdetailService {
   constructor(private httpClient: HttpClient) { }
   apiURL = 'http://localhost:7149/api/OrderProductDetail';
 
-  addOrderDetail(order: any) {
-    console.log("🚀 ~ OrderdetailService ~ order:", order)
-    return this.httpClient.post(this.apiURL + `/InsertOrderProductDetail?orderId=${order.orderId}`,order);
+  addOrderProductDetails(order: any) {
+    return this.httpClient.post(this.apiURL+'/InsertOrderProductDetail',order);
   }
 
   getCartByOrderId(id: string){
@@ -33,5 +32,11 @@ export class OrderdetailService {
   getInforById(userId: string){
     return this.httpClient.get(this.apiURL + `/GetCartOfUser?userId=${userId}`);
   }
+
+  countQtyByDate(date: any) {
+    return this.httpClient.get(this.apiURL + `/GetTotalQtyByCreatedTime?date=${date}`);
+  }
+
+
 
 }

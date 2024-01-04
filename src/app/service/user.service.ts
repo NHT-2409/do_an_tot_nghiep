@@ -35,6 +35,12 @@ export class UserService {
   editUser(data: any): Observable<any> {
     return this.httpClient.put<any>(this.apiURL + `/Update`, data);
   }
+  editPassword(data: any) {
+    return this.httpClient.put<any>(this.apiURL + `/updatePassword?password=${data.password}&id=${data.id}`, data);
+  }
+  editInfo(data: any): Observable<any> {
+    return this.httpClient.put<any>(this.apiURL + `/updateInfo`, data);
+  }
 
   getUserByID(id: any): Observable<any> {
     return this.httpClient.get<any>(this.apiURL + `/GetUser/${id}`);
@@ -43,5 +49,14 @@ export class UserService {
   getUserInfo(user: any) {
     return this.httpClient.get<any>(this.apiURL + `/GetUserInfo?email=${user.email}&password=${user.password}`);
   }
+
+  sendEmail(email: any) {
+    return this.httpClient.post<any>(this.apiURL + `/sendVerification?email=${email}`,email);
+  }
+
+  checkCode(code: any) {
+    return this.httpClient.post<any>(this.apiURL + `/compareKey?userInput=${code}`,code);
+  }
+
 
 }

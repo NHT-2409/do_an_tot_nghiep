@@ -32,7 +32,7 @@
         <div class="right-side">
           <div class="receipt">
             <h4 class="receipt-heading"><b>Address information</b></h4>
-            <mat-card class="card" *ngFor="let item of orderProductDetails">
+            <mat-card style="padding: 10px;" class="card" *ngFor="let item of orderProductDetails">
               <!-- <mat-card-header>
                 <mat-card-title><strong>Giá tiền: {{item?.totalPrice| currency:'VND'}} </strong> </mat-card-title>
               </mat-card-header> -->
@@ -49,44 +49,77 @@
                     </td>
               </mat-card-content>
               <br>
-              <mat-card-actions>
-                <div class="text-center">
+              <mat-card-actions >
+                <div class="text-center" style="display: flex; align-items: center;">
                   <button
                   [style]="{
-                    'min-width': '100px'
+                    'min-width': '150px',
+                    'height': '30px',
+                    'margin-right': '20px'
                   }"
                   (click)="detail(item)"
                   type="button"
                   class="btn btn-primary m-lg-2"> Chi tiết đơn hàng
                 </button>
 
-                <button
-                  [style]="{
-                    'min-width': '100px'
-                  }"
-                  type="button"
-                  class="btn btn-danger"><i class="fa-solid fa-lock"></i> Cancel
-                </button>
+                <div *ngIf="checkStatus(item?.orderId?.status) === 'cancelable'">
+                  <button
+                    type="button"
+                    [style]="{
+                      'min-width': '150px',
+                      'height': '30px',
+                      'margin-right': '20px'
+                    }"
+                    class="btn btn-danger"
+                    (click)="cancelOrder(item?.orderId)">
+                    <i class="fa-solid fa-lock"></i> Cancel
+                  </button>
+                </div>
+
+                <div *ngIf="checkStatus(item?.orderId?.status) === 'non-cancelable'">
+                  <!-- Nút không hoạt động, không có sự kiện click -->
+                  <button
+                    type="button"
+                    [style]="{
+                      'min-width': '150px',
+                      'height': '30px',
+                      'margin-right': '20px'
+                    }"
+                    class="btn btn-danger disabled">
+                    <i class="fa-solid fa-lock"></i> Cancel
+                  </button>
+                </div>
+
+                <div *ngIf="checkStatus(item?.orderId?.status) === 'received-or-cancel'">
+                  <button
+                    type="button"
+                    [style]="{
+                      'min-width': '150px',
+                      'height': '30px',
+                      'margin-right': '10px'
+                    }"
+                    class="btn btn-success"
+                    (click)="confirmReceived(item?.orderId, 4)">
+                    Đã nhận được hàng
+                  </button>
+                  <button
+                    type="button"
+                    [style]="{
+                      'min-width': '150px',
+                      'height': '30px',
+                    }"
+                    class="btn btn-danger"
+                    (click)="cancelOrder(item?.orderId)">
+                    <i class="fa-solid fa-lock"></i> Cancel
+                  </button>
+                </div>
+
 
                 </div>
               </mat-card-actions>
 
             </mat-card>
           </div>
-
-          <!-- <div class="payment-info">
-            <h3 class="payment-heading">Payment Information</h3>
-            <form
-              class="form-box"
-              enctype="text/plain"
-              method="get"
-              target="_blank"
-            >
-              <button class="btn">
-                <i class="fa-solid fa-lock"></i> Cancel
-              </button>
-            </form>
-          </div> -->
         </div>
       </div>
     </div>

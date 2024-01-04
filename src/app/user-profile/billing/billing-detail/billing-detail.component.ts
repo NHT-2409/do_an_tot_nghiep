@@ -26,8 +26,8 @@ export class BillingDetailComponent implements OnInit {
     this.orderProductDetails = this.data.orderProductDetails
     console.log("🚀 ~ BillingDetailComponent ~ this.data.orderProductDetails:", this.data.orderProductDetails)
 
-    console.log("🤜 ~ this.order:", this.orderProductDetails.id)
-    this.getOrderdetails(this.orderProductDetails.id);
+    console.log("🤜 ~ this.order:", this.orderProductDetails?.orderId?.id)
+    this.getOrderdetails(this.orderProductDetails?.orderId?.id);
   }
 
   getOrderdetails(id: any){
@@ -35,7 +35,6 @@ export class BillingDetailComponent implements OnInit {
     this.orderdetailsService.getCartByOrderId(id).subscribe((res: any) => {
       this.orderDetails = res;
       console.log("🤜 ~ res:", res)
-      // this.loadingService.hideLoading();
     })
   }
   onNoClick(): void {

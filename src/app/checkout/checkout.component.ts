@@ -102,7 +102,7 @@ getDiscountPrice(): number {
       };
 
       // Gọi API thêm đơn hàng
-      this.orderService.addOrder(newProduct).subscribe((res:any) => {
+      this.orderdetailService.addOrderProductDetails(newProduct).subscribe((res:any) => {
       }, (err) => {
         switch(err?.error?.text) {
           case "inserted": {

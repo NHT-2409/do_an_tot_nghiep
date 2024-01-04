@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../service/auth-service.service';
 import { UserService } from '../service/user.service';
 import { LoadingService } from '../service/loading.service';
+import { ManageUsersEditComponent } from '../admin/manage-users/manage-users-edit/manage-users-edit.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastService } from '../service/toast.service';
+import { UserProfileEditComponent } from './user-profile-edit/user-profile-edit.component';
+import { UserProfileChangePasswordComponent } from './user-profile-change-password/user-profile-change-password.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,6 +23,9 @@ export class UserProfileComponent implements OnInit {
     private authService: AuthServiceService,
     private userService: UserService,
     private loadingService: LoadingService,
+    public dialog: MatDialog,
+    private elementRef: ElementRef,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +49,32 @@ export class UserProfileComponent implements OnInit {
         // Nếu phản hồi không phải là mảng, biến nó thành mảng với một phần tử
         this.currentUser = [res];
       }
+    });
+  }
+
+  updateInfo(info: any) {
+    const dialogRef = this.dialog.open(UserProfileEditComponent, {
+      width: '700px',
+      data: {
+        user: info
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate(['user-info']);
+    });
+  }
+
+  changePassword(info: any){
+    const dialogRef = this.dialog.open(UserProfileChangePasswordComponent, {
+      width: '700px',
+      data: {
+        user: info
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate(['user-info']);
     });
   }
 
