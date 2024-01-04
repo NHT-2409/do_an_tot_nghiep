@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Sử dụng ngModelChange để cập nhật selectedDate -->
+      <input type="date" class="form-control" [(ngModel)]="selectedDate" (ngModelChange)="calculateTotalOrders(selectedDate)" />
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <p>Tổng số đơn đặt hàng cho ngày {{ selectedDate | date: 'dd MMMM YYYY' }}: {{ totalOrders }}</p>
+    </div>
+  </div>
+</div>

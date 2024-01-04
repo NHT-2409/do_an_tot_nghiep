@@ -29,12 +29,19 @@ export class AuthServiceService {
     return this.loggedIn;
   }
 
+
   setUserData(userData: any) {
     // Lưu thông tin đăng nhập vào cookie
     this.cookieService.set('loggedIn', 'true'); // Đánh dấu đã đăng nhập
     this.cookieService.set('userData', JSON.stringify(userData)); // Chuyển đối tượng thành chuỗi JSON và lưu thông tin user
     this.userDataSubject.next(userData); // Cập nhật BehaviorSubject để thông báo rằng đã có dữ liệu người dùng mới
     this.loggedIn = true;
+  }
+  setUserDataNew(userData: any) {
+    // Clear old cookies
+    this.cookieService.delete('loggedIn');
+    this.cookieService.delete('userData');
+
   }
 
 

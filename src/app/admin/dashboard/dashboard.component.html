@@ -9,6 +9,7 @@
   <a (click)="onChangeSession(NAV_ITEM.ManageNews)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageNews}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-newspaper"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageNews }} </span></a>
   <a (click)="onChangeSession(NAV_ITEM.ManageStores)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageStores}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa fa-shopping-bag icons"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageStores }} </span></a>
   <a (click)="onChangeSession(NAV_ITEM.ManageOrder)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageOrder}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-truck-fast"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageOrder }} </span></a>
+  <a (click)="onChangeSession(NAV_ITEM.ManageStatistical)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageStatistical}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-truck-fast"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageStatistical }} </span></a>
   <br><br><br>
   <a (click)="logOut()"  [style]="{'cursor':'pointer'}" [ngStyle]="{'background-color': status ? '#1A2226' : '#007bff', 'color': 'white'}">
     <i class="fa fa-sign-out-alt"></i> <span class=" ms-3 d-sm-inline-block">Sign out </span>
@@ -74,7 +75,6 @@
     </div>
 
 
-
     <!-- <div (click)="navigate(NAV_ITEM.ManageStores)" [ngClass]="status ? 'mb-2' : 'col-div-3'">
       <div class="box card">
         <p> {{ storeTotal }} <br/><span>Stores</span></p>
@@ -89,6 +89,12 @@
       </div>
     </div>
 
+
+    <div (click)="navigate(NAV_ITEM.ManageStatistical)" [ngClass]="status ? 'mb-2' : 'col-div-3'">
+      <div class="box card">
+        <i class="fa fa-shopping-bag box-icon"></i>
+      </div>
+    </div>
 
   </div>
 
@@ -108,4 +114,5 @@
   <app-manage-news *ngIf="sessison === NAV_ITEM.ManageNews"></app-manage-news>
   <app-manage-stores *ngIf="sessison === NAV_ITEM.ManageStores"></app-manage-stores>
   <app-manage-order *ngIf="sessison === NAV_ITEM.ManageOrder"></app-manage-order>
+  <app-manage-statistical *ngIf="sessison === NAV_ITEM.ManageStatistical"></app-manage-statistical>
 </div>

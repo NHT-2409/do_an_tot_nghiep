@@ -104,6 +104,10 @@ export class DashboardComponent implements OnInit {
         this.onChangeSession(this.NAV_ITEM.ManageOrder);
         break;
       }
+      case this.NAV_ITEM.ManageStatistical: {
+        this.onChangeSession(this.NAV_ITEM.ManageStatistical);
+        break;
+      }
     }
   }
 

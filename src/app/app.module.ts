@@ -67,6 +67,10 @@ import {MatInputModule} from '@angular/material/input';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BillingComponent } from './user-profile/billing/billing.component';
 import { BillingDetailComponent } from './user-profile/billing/billing-detail/billing-detail.component';
+import { UserProfileEditComponent } from './user-profile/user-profile-edit/user-profile-edit.component';
+import { UserProfileChangePasswordComponent } from './user-profile/user-profile-change-password/user-profile-change-password.component';
+import { ManageStatisticalComponent } from './admin/manage-statistical/manage-statistical.component';
+
 
 
 
@@ -111,6 +115,9 @@ import { BillingDetailComponent } from './user-profile/billing/billing-detail/bi
     UserProfileComponent,
     BillingComponent,
     BillingDetailComponent,
+    UserProfileEditComponent,
+    UserProfileChangePasswordComponent,
+    ManageStatisticalComponent,
 
 
   ],

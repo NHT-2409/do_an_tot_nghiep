@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,12 @@ export class OrderService {
 
   httpOptions = {
     headers:new HttpHeaders({'Content-Type':'application/json'})
+  }
+
+  private orders: any[] = []; // Thay thế bằng dữ liệu thực từ server nếu cần
+
+  getOrders(): Observable<any[]> {
+    return of(this.orders);
   }
 
   constructor(private httpClient: HttpClient) { }
@@ -37,5 +43,9 @@ export class OrderService {
   updateStatus(order: any) {
     return this.httpClient.put(this.apiURL + `/UpdateStatus?orderId=${order.orderId}&status=${order.status}&userId=${order.userId}`,order);
   }
+
+
+
+
 
 }

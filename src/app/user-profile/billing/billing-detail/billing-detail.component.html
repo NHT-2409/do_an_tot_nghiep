@@ -1,27 +1,31 @@
 <h2 mat-dialog-title>Order detail</h2>
 <hr>
-  <table class="table" style="max-height: 500px;">
-    <thead class="head">
-      <tr>
-        <th>No.</th>
-        <th>Image</th>
-        <th style="width: 300px;">Tên sản phẩm</th>
-        <th style="width: 120px;">Giá </th>
-        <th style="width: 50px;">Số lượng</th>
+<table class="table" style="max-height: 500px;">
+  <thead class="head">
+    <tr>
+      <th>No.</th>
+      <th>Image</th>
+      <th style="width: 300px;">Name product</th>
+      <th style="width: 120px;">Price product </th>
+      <th style="width: 50px;">Quantity product</th>
+      <th style="width: 50px;">Quantity order</th>
+      <th style="width: 400px;">Promotion</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let item of orderDetails | paginate: { itemsPerPage: 5, currentPage: currentPage }; let i = index">
+        <td scope="row">{{ (currentPage - 1) * 5 + i + 1 }}</td>
+        <td>
+          <img style="width: 50px; height: 50px; border-radius: 9rem;" src="{{ item?.productId.img }}">
+        </td>
+        <td>{{item?.productId.name}}</td>
+        <td>{{item?.productId.price | currency:'VND':'symbol':'1.0-0'}}</td>
+        <td>{{item?.productId.qty}}</td>
+        <td>{{item?.qty}}</td>
+        <td>{{item?.promotion}}</td>
       </tr>
-    </thead>
-      <tbody>
-        <tr *ngFor="let item of orderDetails | paginate: { itemsPerPage: 5, currentPage: currentPage }; let i = index">
-          <td scope="row">{{ (currentPage - 1) * 5 + i + 1 }}</td>
-          <td>
-            <img style="width: 50px; height: 50px; border-radius: 9rem;" src="{{ item?.pro_id.img }}">
-          </td>
-          <td>{{item?.pro_id.name}}</td>
-          <td>{{item?.pro_id.price | currency:'VND':'symbol':'1.0-0'}}</td>
-          <td>{{item?.qty}}</td>
-        </tr>
-      </tbody>
-  </table>
+    </tbody>
+</table>
   <div class="pagination">
     <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
     <span style="margin-left: 6px; margin-top: 4px;"> {{ orderDetails?.length }} Items </span>
