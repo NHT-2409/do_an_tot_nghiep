@@ -1,15 +1,15 @@
 
 <div id="mySidenav h-100" class="sidenav" [ngClass]="status ? 'active' : 'inactive'">
-  <p class="logo"><span>HT's</span><b [ngClass]="status ? 'hidden' : 'visible'"> Store</b></p>
+  <p [style]="{'cursor':'pointer'}" routerLink="/home" class="logo"><span>HT's</span><b [ngClass]="status ? 'hidden' : 'visible'"> Store</b></p>
   <a (click)="onChangeSession(NAV_ITEM.Dashboard)" [ngClass]="{'activeS': sessison === NAV_ITEM.Dashboard }" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa fa-dashboard icons"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.Dashboard }} </span></a>
   <a (click)="onChangeSession(NAV_ITEM.ManageUsers)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageUsers}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa fa-users icons"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageUsers }} </span></a>
   <a (click)="onChangeSession(NAV_ITEM.ManageCategories)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageCategories}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa fa-list icons"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageCategories }} </span></a>
   <a (click)="onChangeSession(NAV_ITEM.ManageProducts)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageProducts}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa fa-shopping-bag icons"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageProducts }} </span></a>
   <a (click)="onChangeSession(NAV_ITEM.ManageBrands)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageBrands}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-yin-yang"></i>  <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageBrands }} </span></a>
   <a (click)="onChangeSession(NAV_ITEM.ManageNews)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageNews}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-newspaper"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageNews }} </span></a>
-  <a (click)="onChangeSession(NAV_ITEM.ManageStores)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageStores}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa fa-shopping-bag icons"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageStores }} </span></a>
+  <a (click)="onChangeSession(NAV_ITEM.ManageStores)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageStores}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-store"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageStores }} </span></a>
   <a (click)="onChangeSession(NAV_ITEM.ManageOrder)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageOrder}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-truck-fast"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageOrder }} </span></a>
-  <a (click)="onChangeSession(NAV_ITEM.ManageStatistical)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageStatistical}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-truck-fast"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageStatistical }} </span></a>
+  <a (click)="onChangeSession(NAV_ITEM.ManageStatistical)" [ngClass]="{'activeS': sessison === NAV_ITEM.ManageStatistical}" [style]="{'cursor':'pointer'}" class="icon-a"><i class="fa-solid fa-chart-simple"></i>   <span [ngClass]="status ? 'hidden' : 'visible'"> {{ NAV_ITEM.ManageStatistical }} </span></a>
   <br><br><br>
   <a (click)="logOut()"  [style]="{'cursor':'pointer'}" [ngStyle]="{'background-color': status ? '#1A2226' : '#007bff', 'color': 'white'}">
     <i class="fa fa-sign-out-alt"></i> <span class=" ms-3 d-sm-inline-block">Sign out </span>
@@ -65,8 +65,6 @@
       </div>
     </div>
 
-
-
     <div (click)="navigate(NAV_ITEM.ManageNews)" [ngClass]="status ? 'mb-2' : 'col-div-3'">
       <div class="box card">
         <p> {{ newsTotal }} <br/><span>News</span></p>
@@ -74,13 +72,12 @@
       </div>
     </div>
 
-
-    <!-- <div (click)="navigate(NAV_ITEM.ManageStores)" [ngClass]="status ? 'mb-2' : 'col-div-3'">
+    <div (click)="navigate(NAV_ITEM.ManageStores)" [ngClass]="status ? 'mb-2' : 'col-div-3'">
       <div class="box card">
         <p> {{ storeTotal }} <br/><span>Stores</span></p>
         <i class="fa fa-shopping-bag box-icon"></i>
       </div>
-    </div> -->
+    </div>
 
     <div (click)="navigate(NAV_ITEM.ManageOrder)" [ngClass]="status ? 'mb-2' : 'col-div-3'">
       <div class="box card">
@@ -98,12 +95,6 @@
 
   </div>
 
-    <!-- <div class="col-div-3">
-      <div class="box card">
-        <p>78<br/><span>Orders</span></p>
-        <i class="fa fa-tasks box-icon"></i>
-      </div>
-    </div> -->
     <div class="clearfix"></div>
   </div>
 

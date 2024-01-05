@@ -12,6 +12,7 @@ import { ToastService } from 'src/app/service/toast.service';
 import { Route, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
+import { StoreService } from 'src/app/service/store.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
   productTotal: any = 0;
   brandTotal: any = 0;
   newsTotal: any = 0;
-  // storeTotal: any = 0;
+  storeTotal: any = 0;
   orderTotal: any = 0;
 
 
@@ -41,6 +42,7 @@ export class DashboardComponent implements OnInit {
     private brandService: BrandService,
     private newsService: NewsService,
     private orderService: OrderService,
+    private storeService: StoreService,
     private loadingService: LoadingService,
     private authService: AuthServiceService,
     private cookieService: CookieService,
@@ -65,16 +67,18 @@ export class DashboardComponent implements OnInit {
       this.categoryService.getTotal(),
       this.productService.getTotal(),
       this.brandService.getTotal(),
-      this.newsService.getTotal(),
       this.orderService.getTotal(),
+      this.newsService.getTotal(),
+      this.storeService.getTotal(),
 
-    ]).subscribe(([userTotal, categoryTotal, productTotal, brandTotal, newsTotal, orderTotal ]) => {
+    ]).subscribe(([userTotal, categoryTotal, productTotal, brandTotal, newsTotal, orderTotal,storeTotal ]) => {
       this.userTotal = userTotal;
       this.categoryTotal = categoryTotal;
       this.productTotal = productTotal;
       this.brandTotal = brandTotal;
       this.newsTotal = newsTotal;
       this.orderTotal = orderTotal;
+      this.storeTotal = storeTotal;
     })
   }
 
@@ -98,6 +102,10 @@ export class DashboardComponent implements OnInit {
       }
       case this.NAV_ITEM.ManageNews: {
         this.onChangeSession(this.NAV_ITEM.ManageNews);
+        break;
+      }
+      case this.NAV_ITEM.ManageStores: {
+        this.onChangeSession(this.NAV_ITEM.ManageStores);
         break;
       }
       case this.NAV_ITEM.ManageOrder: {
