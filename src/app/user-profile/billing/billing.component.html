@@ -39,12 +39,12 @@
               <mat-card-content>
                   <td>
                       <div class="delivery-info">
-                        <p><strong>Tên người nhận:</strong> {{ item?.orderId?.order_name | titlecase }}</p>
-                        <p><strong>Số điện thoại:</strong> {{ item?.orderId?.order_phone }}</p>
-                        <p><strong>Địa chỉ:</strong> {{ item?.orderId?.order_street }} {{ item?.orderId?.order_ward }} {{ item?.orderId?.order_district }} {{ item?.orderId?.orde_city }}</p>
-                        <p><strong>Phương thức thanh toán:</strong> {{ item?.orderId?.paymentMethodId?.methodName }}</p>
-                        <p><strong>Ghi chú:</strong> {{ item?.orderId?.note }}</p>
-                        <p><strong>Trạng thái đơn hàng:</strong> {{getStatusName(item?.orderId?.status) }}</p>
+                        <p><strong>Tên người nhận:</strong> {{ item?.order_name | titlecase }}</p>
+                        <p><strong>Số điện thoại:</strong> {{ item?.order_phone }}</p>
+                        <p><strong>Địa chỉ:</strong> {{ item?.order_street }} {{ item?.order_ward }} {{ item?.order_district }} {{ item?.orde_city }}</p>
+                        <p><strong>Phương thức thanh toán:</strong> {{ item?.paymentMethodId?.methodName }}</p>
+                        <p><strong>Ghi chú:</strong> {{ item?.note }}</p>
+                        <p><strong>Trạng thái đơn hàng:</strong> {{getStatusName(item?.status) }}</p>
                       </div>
                     </td>
               </mat-card-content>
@@ -62,7 +62,7 @@
                   class="btn btn-primary m-lg-2"> Chi tiết đơn hàng
                 </button>
 
-                <div *ngIf="checkStatus(item?.orderId?.status) === 'cancelable'">
+                <div *ngIf="checkStatus(item?.status) === 'cancelable'">
                   <button
                     type="button"
                     [style]="{
@@ -71,12 +71,12 @@
                       'margin-right': '20px'
                     }"
                     class="btn btn-danger"
-                    (click)="cancelOrder(item?.orderId)">
+                    (click)="confirmReceived(item, 4)">
                     <i class="fa-solid fa-lock"></i> Cancel
                   </button>
                 </div>
 
-                <div *ngIf="checkStatus(item?.orderId?.status) === 'non-cancelable'">
+                <div *ngIf="checkStatus(item?.status) === 'non-cancelable'">
                   <!-- Nút không hoạt động, không có sự kiện click -->
                   <button
                     type="button"
@@ -90,7 +90,7 @@
                   </button>
                 </div>
 
-                <div *ngIf="checkStatus(item?.orderId?.status) === 'received-or-cancel'">
+                <div *ngIf="checkStatus(item?.status) === 'received-or-cancel'">
                   <button
                     type="button"
                     [style]="{
@@ -99,7 +99,7 @@
                       'margin-right': '10px'
                     }"
                     class="btn btn-success"
-                    (click)="confirmReceived(item?.orderId, 4)">
+                    (click)="confirmReceived(item, 4)">
                     Đã nhận được hàng
                   </button>
                   <button

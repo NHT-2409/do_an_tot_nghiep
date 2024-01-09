@@ -23,11 +23,9 @@ export class BillingDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { orderProductDetails: any },
   ) {}
   ngOnInit(): void {
-    this.orderProductDetails = this.data.orderProductDetails
-    console.log("🚀 ~ BillingDetailComponent ~ this.data.orderProductDetails:", this.data.orderProductDetails)
+    this.orderProductDetails = this.data.orderProductDetails;
 
-    console.log("🤜 ~ this.order:", this.orderProductDetails?.orderId?.id)
-    this.getOrderdetails(this.orderProductDetails?.orderId?.id);
+    this.getOrderdetails(this.orderProductDetails?.id);
   }
 
   getOrderdetails(id: any){

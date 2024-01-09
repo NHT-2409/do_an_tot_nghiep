@@ -29,10 +29,6 @@ export class OrderdetailService {
     return this.httpClient.get(this.apiURL + `/GetOrderDetailById/id?id=${id}`);
   }
 
-  getInforById(userId: string){
-    return this.httpClient.get(this.apiURL + `/GetCartOfUser?userId=${userId}`);
-  }
-
   countQtyByDate(date: any) {
     return this.httpClient.get(this.apiURL + `/GetTotalQtyByCreatedTime?date=${date}`);
   }

@@ -55,7 +55,10 @@ export class BillingComponent implements OnInit {
 
     this.userService.getUserInfo(user).subscribe((res) => {
       this.currentUser = [res]
-        this.orderdetailService.getInforById(res.id).subscribe((data: any) => {
+      console.log("🚀 ~ BillingComponent ~ res:", res.id)
+
+        this.orderService.getInforById(res.id).subscribe((data: any) => {
+
           this.orderProductDetails = data;
           console.log("🤜 ~ this.userOrders:", this.orderProductDetails)
         })
@@ -126,6 +129,7 @@ export class BillingComponent implements OnInit {
         switch(err?.error?.text) {
           case "updated": {
             this.toastService.show(`Confirm successfully!`);
+            
            break;
          }
         }
