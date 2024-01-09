@@ -46,6 +46,10 @@ export class OrderService {
 
 
 
+  getInforById(userId: string){
+    return this.httpClient.get(this.apiURL + `/GetOrdersByUserId/id?id=${userId}`);
+  }
+
 
 
 }

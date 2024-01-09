@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { OrderService } from 'src/app/service/order.service';
 import { OrderdetailService } from 'src/app/service/orderdetail.service';
+import { UcWidgetModule } from 'ngx-uploadcare-widget';
+
 
 @Component({
   selector: 'app-manage-statistical',
@@ -33,6 +35,15 @@ export class ManageStatisticalComponent implements OnInit{
     return date1.getFullYear() === date2.getFullYear() &&
            date1.getMonth() === date2.getMonth() &&
            date1.getDate() === date2.getDate();
+  }
+
+
+
+  uploadedImageUrl: any
+  onUploadComplete(info: any) {
+    console.log("🤜 ~ info.cdnUrl:", info)
+    console.log("🤜 ~ info.cdnUrl:", info.cdnUrl)
+    // this.uploadedImageUrl = info.cdnUrl;
   }
 
 }

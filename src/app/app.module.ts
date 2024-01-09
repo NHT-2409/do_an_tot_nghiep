@@ -71,7 +71,7 @@ import { UserProfileEditComponent } from './user-profile/user-profile-edit/user-
 import { UserProfileChangePasswordComponent } from './user-profile/user-profile-change-password/user-profile-change-password.component';
 import { ManageStatisticalComponent } from './admin/manage-statistical/manage-statistical.component';
 
-
+import { UcWidgetModule } from 'ngx-uploadcare-widget';
 
 
 @NgModule({
@@ -137,6 +137,8 @@ import { ManageStatisticalComponent } from './admin/manage-statistical/manage-st
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    UcWidgetModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

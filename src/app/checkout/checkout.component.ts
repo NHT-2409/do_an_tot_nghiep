@@ -100,6 +100,9 @@ getDiscountPrice(): number {
         userId: userId,
         paymentMethodId: this.selectedPaymentMethod,
       };
+      console.log("🚀 ~ CheckoutComponent ~ newProduct:", newProduct)
+
+
 
       // Gọi API thêm đơn hàng
       this.orderdetailService.addOrderProductDetails(newProduct).subscribe((res:any) => {

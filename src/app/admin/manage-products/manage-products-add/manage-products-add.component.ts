@@ -15,6 +15,7 @@ export class ManageProductsAddComponent {
   categories: any;
   brands: any;
 
+  uploadedImageUrl: any;
 
   addNewForm: any = this.fb.group({
     img: ['', Validators.required],
@@ -45,6 +46,11 @@ export class ManageProductsAddComponent {
   onChangeCategory() {
   }
 
+  onUploadComplete(info: any) {
+    this.uploadedImageUrl = info.cdnUrl
+    console.log("🤜 ~ info.cdnUrl:", info.cdnUrl)
+  }
+
   onChangebrand() {
   }
 
@@ -67,7 +73,7 @@ export class ManageProductsAddComponent {
 
   add() {
     const newProduct = {
-      'img': this.addNewForm.value.img,
+      'img': this.uploadedImageUrl,
       'name': this.addNewForm.value.name,
       'slug': this.addNewForm.value.name,
       'qty': this.addNewForm.value.qty,
