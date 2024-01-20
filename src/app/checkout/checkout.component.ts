@@ -63,12 +63,17 @@ export class CheckoutComponent implements OnInit{
 
   onChange() {}
 
-getTotalPrice(): number {
-  return this.cartData.reduce((total: any, item: any) => {
-    const discountPrice = (total + ((item.product_id.price * item.qty)) > 20000000) ? (total + ((item.product_id.price * item.qty)) * 0.05) : 0;
-    return total + ((item.product_id.price * item.qty) - discountPrice);
-  }, 0);
-}
+  getTotalPrice(): number {
+    return this.cartData.reduce((total: number, item: any) => {
+    // Tính discountedPrice ngay trước khi thêm vào tổng
+    const itemTotal = item.product_id.price * item.qty;
+    const discountedPrice = (total + itemTotal > 50000000)
+      ? itemTotal * 0.95 // Giảm 5% nếu tổng giá trị sản phẩm lớn hơn 50,000,000
+      : itemTotal;
+
+    return total + discountedPrice;
+    }, 0);
+  }
 
 
 

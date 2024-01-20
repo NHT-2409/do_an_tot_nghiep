@@ -31,11 +31,17 @@
                   </div>
 
                   <div class="col-md-6 form-group">
-                      <label>Phone number</label>
-                      <input formControlName="order_phone" class="form-control" type="phone" placeholder="Enter phone number">
-                      <div *ngIf="checkoutForm.controls['order_phone']?.errors && checkoutForm.controls['order_phone'].dirty" class="text-danger">
-                        <div *ngIf="checkoutForm.controls['order_phone']?.errors?.required">Phone is required</div>
-                      </div>
+                    <label for="phone">Phone</label>
+                    <div class="input-group">
+                      <span class="input-group-text">+84</span>
+                      <input formControlName="order_phone" type="text" class="form-control "
+                        placeholder="Phone number" />
+                    </div>
+
+                    <div *ngIf="checkoutForm.controls['order_phone']?.errors && checkoutForm.controls['order_phone'].dirty" class="text-danger">
+                      <div *ngIf="checkoutForm.controls['order_phone']?.errors?.required">Phone number is required</div>
+                      <div *ngIf="checkoutForm.controls['order_phone']?.errors?.pattern">Invalid phone number format</div>
+                    </div>
                   </div>
 
                   <div class="row">

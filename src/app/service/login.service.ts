@@ -21,6 +21,8 @@ export class LoginService {
     return this.httpClient.get<any>(this.apiURL + `/GetUserInfo?email=${credentials.email}&password=${credentials.password}`);
   }
 
-
+  getUserInfo(email: any, password: any ) {
+    return this.httpClient.get<any>(this.apiURL + `/GetUserInfo?email=${email}&password=${password}`);
+  }
 
 }

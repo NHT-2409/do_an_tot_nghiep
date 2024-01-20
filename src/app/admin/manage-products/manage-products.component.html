@@ -1,8 +1,15 @@
-<form action="" class="form-inline" method="post" role="form">
-  <button type="submit" (click)="add()" class="btn btn-primary">Add new</button>
-</form>
+<div class="d-flex">
+  <mat-form-field class="ml-2">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
 
-<hr>
+  <form action="" class="form-inline" method="post" role="form">
+    <button type="submit" (click)="add()" class="btn btn-primary">Add new</button>
+  </form>
+</div>
+
+
 
 <div class="mat-elevation-z8" id="father">
   <table class="table" style="min-height: 500px;">
@@ -16,6 +23,7 @@
         <th>Category Product</th>
         <th>Brand Product</th>
         <th style="width: 120px;">Created Time</th>
+        <th class="filter-header"><i (click)="toggleFilter()" [ngClass]="{'fa-filter-active': showFilterDropdown}" class="fa-solid fa-filter"></i></th>
         <th style="width: 120px;">Updated Time</th>
       </tr>
     </thead>
@@ -44,6 +52,7 @@
           <td>{{getCategoryName(item?.categoryId?.id) | titlecase}}</td>
           <td>{{getBrandName(item?.brandId?.id) | titlecase}}</td>
           <td>{{ item?.created_time | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td></td>
           <td>{{ item?.updated_time | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>
             <button (click)="update(item)" class="btn btn-primary mr-1" >Update</button>

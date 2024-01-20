@@ -175,3 +175,9 @@ a.list-group-item, .list-group-item-action {
   background-color: transparent;
   content: '';
 }
+
+.disabled-link {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: #999;  // Màu chữ khi liên kết bị vô hiệu hóa
+}

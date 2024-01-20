@@ -18,6 +18,10 @@ export class NewsService {
     return this.httpClient.get<any>(this.apiURL + `/GetNewsList`);
   }
 
+  getNewsById(id: any): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + `/GetNewsById/id?id=${id}`);
+  }
+
   getTotal() {
     return this.httpClient.get(this.apiURL + '/GetTotalOfNews');
   }

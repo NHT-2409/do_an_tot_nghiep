@@ -95,10 +95,8 @@
         </div>
       </div>
 
-      <!-- Thêm sự kiện (click) để gọi hàm navigateToCart() -->
-      <button [disabled]="currentUser?.role === 'admin' || quantityExceedsAvailable || product?.qty === 0" class="btn btn-warning" (click)="addToCart()"> Buy now </button>
-      <!-- <button [disabled]="!currentUser || currentUser?.role === 'admin'" (click)="addToCart()" class="btn  btn-primary"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </button>
-      <a class="btn  btn-light"> <i class="me-1 fa fa-heart"></i> Save </a> -->
+      <button [disabled]="currentUser?.role == 'admin' || quantityExceedsAvailable || product?.qty === 0" class="btn btn-warning" (click)="addToCart()"> Buy now </button>
+
 
       </article>
     </main>

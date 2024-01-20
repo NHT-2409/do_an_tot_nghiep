@@ -44,7 +44,9 @@ export class OrderService {
     return this.httpClient.put(this.apiURL + `/UpdateStatus?orderId=${order.orderId}&status=${order.status}&userId=${order.userId}`,order);
   }
 
-
+  getOrdeByStatus(status: number): Observable<any>{
+    return this.httpClient.get(this.apiURL + `/GetOrderByStatus/id?status=${status}`);
+  }
 
   getInforById(userId: string){
     return this.httpClient.get(this.apiURL + `/GetOrdersByUserId/id?id=${userId}`);

@@ -22,6 +22,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BillingComponent } from './user-profile/billing/billing.component';
 import { AdminGuard } from './admin.guard';
 import { LoginGuard } from './login.guard';
+import { NewsComponent } from './news/news.component';
 
 
 
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: 'thankyou', component: ThankyouComponent},
   {path: 'checkout', component: CheckoutComponent},
 
+  {path: 'news-description/:id', component: NewsComponent},
 
   { path: 'orders-list', component: BillingComponent },
   { path: 'user-info', component: UserProfileComponent },

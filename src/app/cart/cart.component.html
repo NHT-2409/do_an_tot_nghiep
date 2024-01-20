@@ -42,7 +42,7 @@
 
                           <td class="align-middle">{{ (item.product_id.price * item.qty) | currency:'VND':'symbol':'1.0-0' }}</td>
 
-                          <td class="align-middle"><button (click)="deleteAll(cartData)" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                          <td class="align-middle"><button (click)="deleteAll(item)" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                       </tr>
                       <br>
                       <div class="col-sm-15 mb-3 mb-m-1 order-md-1 text-md-left">

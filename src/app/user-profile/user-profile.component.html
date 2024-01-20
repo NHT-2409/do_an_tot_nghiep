@@ -16,15 +16,16 @@
               </div>
           </div>
           <div class="wizard">
-              <nav class="list-group list-group-flush">
-                <a routerLink="/orders-list" class="list-group-item" routerLinkActive="active">
-                  <i class="fe-icon-shopping-bag mr-1 text-muted"></i>Orders List
-                </a>
-                  <a routerLink="/user-info" class="list-group-item active" routerLinkActive="active">
-                    <i class="fe-icon-user text-muted"></i>Profile Settings
-                </a>
+            <nav class="list-group list-group-flush">
+              <a routerLink="/orders-list" class="list-group-item" routerLinkActive="active" [ngClass]="{'disabled-link': isAdmin()}">
+                <i class="fe-icon-shopping-bag mr-1 text-muted"></i>Orders List
+              </a>
 
-              </nav>
+              <a routerLink="/user-info" class="list-group-item active" routerLinkActive="active">
+                <i class="fe-icon-user text-muted"></i>Profile Settings
+              </a>
+            </nav>
+
           </div>
       </div>
 

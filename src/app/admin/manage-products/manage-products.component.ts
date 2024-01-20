@@ -20,6 +20,9 @@ export class ManageProductsComponent {
   categories: any;
   brands: any;
   currentPage: number = 1;
+  showFilterDropdown: boolean = false;
+  ascendingOrder: boolean = true;
+
 
   constructor(
     private toastService: ToastService,
@@ -34,6 +37,23 @@ export class ManageProductsComponent {
   ngOnInit(): void {
     this.getCategory();
 
+  }
+
+  toggleFilter() {
+    this.showFilterDropdown = !this.showFilterDropdown;
+
+    if (this.showFilterDropdown) {
+      this.ascendingOrder = !this.ascendingOrder;
+
+      this.products.sort((a: { id: number }, b: { id: number }) => {
+        console.log("🚀 ~ ManageProductsComponent ~ a:", a.id)
+
+        return this.ascendingOrder ? a.id - b.id : b.id - a.id;
+      });
+    } else {
+
+      this.products = [...this.products];
+    }
   }
 
   getProducts() {
@@ -130,5 +150,26 @@ export class ManageProductsComponent {
       }
     });
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+
+    // Nếu filterValue rỗng, hiển thị lại toàn bộ dữ liệu
+    if (!filterValue) {
+      this.getProducts();
+      return;
+    }
+
+    // Thực hiện lọc dữ liệu dựa trên filterValue
+    this.products = this.products.filter((item: { name: string; }) => {
+      // Thực hiện lọc ở đây, ví dụ:
+      // Nếu muốn lọc theo tên sản phẩm, thay 'name' bằng tên field muốn lọc
+      return item.name.toLowerCase().includes(filterValue);
+    });
+
+    // Reset lại trang về 1 khi áp dụng bộ lọc
+    this.currentPage = 1;
+  }
+
 
 }

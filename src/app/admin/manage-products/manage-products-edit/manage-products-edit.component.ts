@@ -15,7 +15,9 @@ export class ManageProductsEditComponent {
   product: any;
   brands: any;
   editForm: any;
+  uploadedImageUrl: any;
 
+  
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -30,6 +32,12 @@ export class ManageProductsEditComponent {
     this.product = this.data.product;
     this.brands = this.data.brands;
     this.buildForm();
+  }
+
+
+  onUploadComplete(info: any) {
+    this.uploadedImageUrl = info.cdnUrl
+    console.log("🤜 ~ info.cdnUrl:", info.cdnUrl)
   }
 
   buildForm() {
