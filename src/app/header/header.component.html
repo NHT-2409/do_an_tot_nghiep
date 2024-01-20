@@ -32,23 +32,18 @@
 
           </div>
         </div>
-         <!-- col end.// -->
         <div class="col-lg-5 col-md-12 col-12">
-          <form action="#" class="">
-                  <div class="input-group">
-                    <input type="search" class="form-control" style="width:55%" placeholder="Search">
-                    <select class="form-select">
-                      <option value="">All type</option>
-                      <option value="codex">Special</option>
-                      <option value="comments">Only best</option>
-                      <option value="content">Latest</option>
-                    </select>
-                    <button class="btn btn-primary">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </div> <!-- input-group end.// -->
-                </form>
+          <form (ngSubmit)="onSearch()" class="">
+            <div class="input-group">
+              <input [(ngModel)]="searchKeyword" type="search" class="form-control" style="width:55%" placeholder="Search">
+              <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+              </button>
+            </div> <!-- input-group end.// -->
+          </form>
         </div> <!-- col end.// -->
+
+
 
       </div> <!-- row end.// -->
     </div> <!-- container end.// -->
@@ -73,22 +68,6 @@
           <li class="nav-item">
             <a class="nav-link">Contact Us</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Menu item</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Menu name</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">
-              Others
-            </a>
-            <ul class="dropdown-menu">
-              <li> <a class="dropdown-item" href="#">Submenu one </a> </li>
-              <li> <a class="dropdown-item" href="#">Submenu two</a> </li>
-              <li> <a class="dropdown-item" href="#">Submenu three</a> </li>
-            </ul>
-          </li> -->
         </ul>
       </div> <!-- collapse end.// -->
     </div> <!-- container end.// -->

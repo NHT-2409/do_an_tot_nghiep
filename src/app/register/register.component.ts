@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { ToastService } from '../service/toast.service';
 import { UserService } from '../service/user.service';
 import { user } from '../model/user.model';
+import { LoadingComponent } from '../loading/loading.component';
+import { LoadingService } from '../service/loading.service';
+import { LoginService } from '../service/login.service';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +31,9 @@ export class RegisterComponent implements OnInit{
     private router: Router,
     private fb: FormBuilder,
     private toastService: ToastService,
-    private userService: UserService
+    private userService: UserService,
+    private loginService: LoginService,
+
   ) {}
 
   ngOnInit(): void {
@@ -44,20 +49,29 @@ export class RegisterComponent implements OnInit{
       role: 'user'
     }
 
-    this.userService.register(user).subscribe(res => {
-    }, (err) => {
-      switch(err?.error?.text) {
-        case 'insert fail': {
-          this.toastService.show('Email already exists', 'err');
-          break;
-        }
-        case 'inserted': {
-          this.toastService.show('Register successfully!');
-          this.router.navigate(['/login']);
-          break;
-        }
+    this.loginService.getUserInfo( user.email, user.password).subscribe(res => {
+      if(res.email != user.email) {
+        this.userService.register(user).subscribe(res => {
+        }, (err) => {
+          switch(err?.error?.text) {
+            case 'insert fail': {
+              this.toastService.show('Email already exists', 'err');
+              break;
+            }
+            case 'inserted': {
+              this.toastService.show('Register successfully!');
+              this.router.navigate(['/login']);
+              break;
+            }
+          }
+        })
+      }
+      else {
+        this.toastService.show('Email already exists', 'err');
       }
     })
+
+
   }
 
   passwordMatchValidator(formGroup: any) {

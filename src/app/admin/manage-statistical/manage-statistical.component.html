@@ -1,18 +1,120 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="card-title mb-0">Tổng doanh thu theo ngày</h1>
+        </div>
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-6 col-lg-12">
+              <div class="mb-3">
+                <label for="start_date"> Date:</label>
+                <input type="date" class="form-control" [(ngModel)]="selectedDate"
+                  (ngModelChange)="calculateQtyTotalOrders(selectedDate)" />
+              </div>
+            </div>
+            <div class="col-6 col-lg-12 ">
+              <div class="border-success border rounded text-center py-3 mb-3">
+                <p class="text-success mb-0">Total Qty: {{ totalQtyOrders }}</p>
+              </div>
+              <div class="border-success border rounded text-center py-3 mb-3">
+                <p class="text-success mb-0">Total Price: {{ totalPriceOrders | currency:'VND'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <input type="date" class="form-control" [(ngModel)]="selectedDate" (ngModelChange)="calculateTotalOrders(selectedDate)" />
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="card-title mb-0">Tổng doanh thu theo từng quý</h1>
+        </div>
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="row">
+              <div class="col-12 col-lg-6">
+                <select class="form-control" [(ngModel)]="selectedYear">
+                  <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+                </select>
+              </div>
+              <div class="col-12 col-lg-6">
+                <div class="row">
+                  <div class=" col-2">
+                    <button type="button" class="btn btn-primary" (click)="setSelectedQuarter(1)">Quý 1</button>
+                  </div>
+                  <div class="col-2">
+                    <button type="button" class="btn btn-primary" (click)="setSelectedQuarter(2)">Quý 2</button>
+                  </div>
+                  <div class="col-2">
+                    <button type="button" class="btn btn-primary" (click)="setSelectedQuarter(3)">Quý 3</button>
+                  </div>
+                  <div class="col-2">
+                    <button type="button" class="btn btn-primary" (click)="setSelectedQuarter(4)">Quý 4</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-lg-12">
+              <div class="border-success border rounded text-center py-3 mb-3">
+                <p class="text-success mb-0">Total Qty: {{ totalQtyOrdersByQuarter }}</p>
+              </div>
+              <div class="border-success border rounded text-center py-3 mb-3">
+                <p class="text-success mb-0">Total Price: {{ totalPriceOrdersQuarter | currency:'VND'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-md-6">
-      <p>Tổng số đơn đặt hàng cho ngày {{ selectedDate | date: 'dd MMMM YYYY' }}: {{ totalOrders }}</p>
+
+
+  <div class="col-lg-12 order-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title mb-0">Top sản phẩm bán chạy</h1>
+      </div>
+      <div class="card-body">
+        <div class="card m-b-30">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" [(ngModel)]="startDate">
+              </div>
+              <div class="mb-3">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" [(ngModel)]="endDate"
+                  max="{{ getCurrentDate() }}">
+              </div>
+            </div>
+            <div style="text-align: center;" class="col-12">
+              <button class="btn btn-primary" (click)="getTopProduct()">Thông tin sản phẩm bán chạy</button>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Img</th>
+                <th>Tên SP</th>
+                <th>Số lượng đã bán</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of topProduct | paginate: { itemsPerPage: 5, currentPage: currentPage }; let i = index">
+              <td scope="row">{{ (currentPage - 1) * 5 + i + 1 }}</td>
+              <img (click)="viewImage(item?.product_id.img)" style="width: 50px; height: 50px; border-radius: 9rem;"
+                src="{{ item?.product_id.img }}">
+              <td>{{item.product_id.name}}</td>
+              <td>{{item.total_Qty}}</td>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
-

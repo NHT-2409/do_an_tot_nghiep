@@ -46,10 +46,15 @@ export class UserProfileComponent implements OnInit {
       if (Array.isArray(res)) {
         this.currentUser = res;
       } else {
-        // Nếu phản hồi không phải là mảng, biến nó thành mảng với một phần tử
+
         this.currentUser = [res];
       }
     });
+  }
+
+  isAdmin(): boolean {
+    // Assume your user object has a 'role' property indicating the user's role
+    return this.currentUser?.[0]?.role === 'admin';
   }
 
   updateInfo(info: any) {

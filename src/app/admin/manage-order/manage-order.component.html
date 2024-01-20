@@ -1,6 +1,8 @@
-<form action="" class="form-inline" method="post" role="form">
-  <!-- <button type="submit" (click)="add()" class="btn btn-primary">Add new</button> -->
-</form>
+<div class="d-flex">
+  <form action="" class="form-inline" method="post" role="form">
+    <button type="submit" class="btn btn-primary">Add new</button>
+  </form>
+</div>
 
 
 
@@ -13,7 +15,18 @@
         <th style="width: 200px;">Note </th>
         <th>Total Price</th>
         <th style="width: 120px;">Created Time</th>
+        <th class="filter-header"><i (click)="toggleFilter()" [ngClass]="{'fa-filter-active': showFilterDropdown}" class="fa-solid fa-filter"></i></th>
+
         <th style="width: 200px;">Status</th>
+        <th>
+          <select [(ngModel)]="selectedStatus" (change)="onStatusFilterChange(selectedStatus)">
+            <option value="5">All</option>
+            <option value="0">Chờ xác nhận đơn hàng</option>
+            <option value="1">Đã xác nhận</option>
+            <option value="2">Đang giao hàng</option>
+            <option value="3">Giao thành công</option>
+          </select>
+        </th>
       </tr>
     </thead>
       <tbody>
@@ -27,6 +40,7 @@
           <td>{{item?.note}}</td>
           <td>{{item?.total | currency:'VND':'symbol':'1.0-0'}}</td>
           <td>{{ item?.order_updated_time | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td></td>
           <td>
             {{
               item?.status === 0 ? 'Chờ xác nhận đơn hàng' :

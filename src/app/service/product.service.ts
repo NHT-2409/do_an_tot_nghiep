@@ -55,6 +55,10 @@ export class ProductService {
     return this.httpClient.get(this.apiURL + `/GetProductById/${id}`);
   }
 
+  search(keyword: any) {
+    return this.httpClient.get(this.apiURL + `/search?keyword=${keyword}`);
+  }
+
 }
 
 

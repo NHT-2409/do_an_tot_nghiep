@@ -1,0 +1,13 @@
+<app-header></app-header>
+
+<div class="news-detail-container" *ngIf="news">
+  <div class="news-header">
+    <h1 class="news-title">{{ news.title }}</h1>
+    <img [src]="news.imageUrl" [alt]="news.title" class="news-image">
+  </div>
+  <div class="news-content">
+    <p>{{ news.description }}</p>
+  </div>
+</div>
+
+<app-footer></app-footer>

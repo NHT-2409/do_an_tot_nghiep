@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ToastService } from '../service/toast.service';
 import { UserService } from '../service/user.service';
 import { LoginService } from '../service/login.service';
@@ -8,6 +8,7 @@ import { AuthServiceService } from '../service/auth-service.service';
 import { user } from '../model/user.model';
 import { CartService } from '../service/cart.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ProductService } from '../service/product.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit{
   hrefMyCart: string = '';
   isAdmin: boolean = false;
 
+  searchKeyword: any = '';
 
   isHidenBadge: boolean = false;
   cartItemsQuantity: number = 0;
@@ -30,6 +32,7 @@ export class HeaderComponent implements OnInit{
   constructor(
     private router: Router,
     private toastService: ToastService,
+    private productService: ProductService,
     private userService: UserService,
     private loginService: LoginService,
     private adminService: AdminService,
@@ -42,9 +45,10 @@ export class HeaderComponent implements OnInit{
   ngOnInit(): void {
 
     this.authService.userData$.subscribe((userData) => {
+
       if (userData) {
-        console.log("🚀 ~ HeaderComponent ~ userData:", userData)
         this.currentUser = userData;
+
         this.check_Role(this.currentUser?.email, this.currentUser?.password);
       }
     });
@@ -55,6 +59,22 @@ export class HeaderComponent implements OnInit{
       this.getCartItemsQuantity();
     });
 
+  }
+
+
+  onSearch() {
+
+    console.log("🚀 ~ HeaderComponent ~ this.searchKeyword:", this.searchKeyword)
+
+
+  }
+
+  navigateDetails(product: any) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: { productId: product.id }
+    };
+
+    this.router.navigate(['/single'], navigationExtras);
   }
 
   getCartItemsQuantity() {
@@ -106,8 +126,10 @@ export class HeaderComponent implements OnInit{
   }
 
   check_Role(email: string, password: string) {
+
     this.loginService.checkRole({ email, password }).subscribe(
       (data) => {
+        console.log("🚀 ~ HeaderComponent ~ data:", data)
         if (typeof data === 'string') {
           // Xử lý khi data là chuỗi
           console.log('Data is a string:', data);
@@ -124,5 +146,6 @@ export class HeaderComponent implements OnInit{
       }
     );
   }
+
 
 }

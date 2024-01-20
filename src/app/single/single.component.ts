@@ -22,6 +22,9 @@ export class SingleComponent implements OnInit{
   currentUser: any;
   quantity: number = 1;
   userId: string = '';
+  quantityExceedsAvailable: boolean = false;
+
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -35,7 +38,7 @@ export class SingleComponent implements OnInit{
   {
     this.currentUser = this.authService.getCurrentUser();
 
-   }
+  }
 
   ngOnInit() {
     this.loadingService.showLoading();
@@ -47,35 +50,45 @@ export class SingleComponent implements OnInit{
         this.loadingService.hideLoading();
       })
     });
-  }
 
-  quantityExceedsAvailable: boolean = false;
-
-handelQuantity(action: string) {
-  if (action === 'down' && this.quantity >= 2) {
-    this.quantity--;
-  }
-
-  if (action === 'up') {
-    this.quantity++;
-  }
-
-  // Kiểm tra xem số lượng mua có vượt quá số lượng hiện có không
-  this.quantityExceedsAvailable = this.quantity > this.product.qty;
-}
-
-addToCart() {
-  if (this.authService.isLoggedIn()) {
     const user = {
       email: this.currentUser.email,
       password: this.currentUser.password,
     }
 
     this.userService.getUserInfo(user).subscribe((res) => {
-      this.loadingService.showLoading();
+      this.currentUser = res
+    })
+  }
 
+
+
+  handelQuantity(action: string) {
+    if (action === 'down' && this.quantity >= 2) {
+      this.quantity--;
+    }
+
+    if (action === 'up') {
+      this.quantity++;
+
+      // Kiểm tra xem số lượng mua có vượt quá số lượng hiện có không
+      if (this.quantity > this.product.qty) {
+        this.toastService.show(`Số lượng mua vượt quá số lượng hiện có`, 'err');
+        // Giảm số lượng mua để tránh vượt quá
+        this.quantity--;
+      }
+    }
+  }
+
+
+addToCart() {
+  if (this.authService.isLoggedIn()) {
+
+    console.log("🚀 ~ SingleComponent ~ user.this.currentUser:", this.currentUser)
+    
+      this.loadingService.showLoading();
       const cart = {
-        userId: res.id,
+        userId: this.currentUser.id,
         productId: this.product.id,
         qty: this.quantity
       }
@@ -106,9 +119,6 @@ addToCart() {
           }
         }
       });
-
-      // this.router.navigate(['/cart']);
-    });
   } else {
     // Nếu chưa đăng nhập, chuyển hướng tới trang Login
     this.toastService.show('Need to log in to purchase', 'err');

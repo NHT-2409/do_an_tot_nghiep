@@ -72,6 +72,7 @@ import { UserProfileChangePasswordComponent } from './user-profile/user-profile-
 import { ManageStatisticalComponent } from './admin/manage-statistical/manage-statistical.component';
 
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
+import { NewsComponent } from './news/news.component';
 
 
 @NgModule({
@@ -118,6 +119,7 @@ import { UcWidgetModule } from 'ngx-uploadcare-widget';
     UserProfileEditComponent,
     UserProfileChangePasswordComponent,
     ManageStatisticalComponent,
+    NewsComponent,
 
 
   ],

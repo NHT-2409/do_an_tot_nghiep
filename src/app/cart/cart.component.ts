@@ -87,6 +87,9 @@ export class CartComponent implements OnInit{
       userId: item?.users_id?.id,
       productId: item?.product_id?.id
     };
+    console.log("🚀 ~ CartComponent ~ cart:", cart)
+
+
 
     this.cartService.deleteCartItem(cart).subscribe(
       res => {
